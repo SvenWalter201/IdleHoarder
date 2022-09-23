@@ -17,6 +17,8 @@ public class SquirrelBehaviour : MonoBehaviour
     void Awake() 
     {
         HexGrid.Instance.allSquirrels.Add(this);
+        GetComponentInChildren<MeshRenderer>().gameObject.transform.localScale *= Random.Range(0.8f, 1.2f);
+        speed = speed * Random.Range(0.8f, 1.2f);
     }
 
     void Start()
@@ -76,18 +78,6 @@ public class SquirrelBehaviour : MonoBehaviour
     }
 }
 
-/**
-- Commands: 
-
-    - Do nothing
-    - Wood to Base -> Trade Post to Base
-    - Stone to Base -> Trade Post to Base
-    - Acorn to Base -> Production Site to Base
-    - Water to Base -> Production Site to Base
-    - Acorn to Beaver Post -> Base to Trade Post || Production Site to Trade Post
-    - Water to Mole Post -> Base to Trade Post || Production Site to Trade Post
-*/
-
 public class State
 {
     public SquirrelBehaviour stateMachine;
@@ -117,6 +107,10 @@ public class TransportationWork : State
     HexCellContent currentGoal, otherGoal;
     public List<HexCell> path;
     int currentPathIndex = 0;
+    bool updateRandomV3 = false;
+    float remainingWaitTime = 0.0f;
+
+    Vector3 randomV3 = Vector3.zero;
 
     public void OnGridUpdate()
     {
@@ -135,7 +129,11 @@ public class TransportationWork : State
     public override void Update()
     {
         base.Update();
-
+        if(remainingWaitTime > 0.0f)
+        {
+            remainingWaitTime-= Time.deltaTime;
+            return;
+        }
 
         if(path == null)
         {
@@ -146,7 +144,12 @@ public class TransportationWork : State
             Debug.Log(path.Count);
         }
 
-        HexCell nextWayPoint = path[currentPathIndex];
+        if(updateRandomV3)
+        {
+            randomV3 = new Vector3(Random.Range(-5f,5f), 0f, Random.Range(-5f,5f));
+            updateRandomV3 = false;
+        }
+        Vector3 nextWayPoint = path[currentPathIndex].transform.position + randomV3;
         float distanceToGoal = (currentGoal.transform.position - stateMachine.transform.position).magnitude;
 
         if(distanceToGoal < HexMetrics.innerRadius * 0.8f)
@@ -179,16 +182,20 @@ public class TransportationWork : State
                 otherGoal = otherDeposit;
                 path = HexGrid.Instance.FindPath(HexGrid.Instance.CellFromPosition(stateMachine.transform.position), mainBase.hexCellReference);
             }
+            remainingWaitTime = Random.Range(1.0f, 1.3f);
             return;
         }
 
-        Vector3 nextWayPointDir = nextWayPoint.transform.position - stateMachine.transform.position;
+        Vector3 nextWayPointDir = nextWayPoint - stateMachine.transform.position;
         if(nextWayPointDir.magnitude < (HexMetrics.innerRadius * 0.1f))
         {
             ++currentPathIndex;
+            updateRandomV3 = true;
         }
 
         nextWayPointDir.Normalize();
+        stateMachine.transform.rotation = Quaternion.RotateTowards(stateMachine.transform.rotation, 
+        Quaternion.LookRotation(nextWayPointDir, Vector3.up), 360.0f * Time.deltaTime);
         stateMachine.transform.position += nextWayPointDir * stateMachine.speed * Time.deltaTime;
     }
 }

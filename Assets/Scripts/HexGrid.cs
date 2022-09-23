@@ -358,6 +358,9 @@ public class HexGrid : Singleton<HexGrid>
             Debug.Log("Max Length Error!");
         }
 
+        if(path.Count > 1)
+            path.RemoveAt(path.Count-1);
+            
         path.Reverse();
         return path;
     }
