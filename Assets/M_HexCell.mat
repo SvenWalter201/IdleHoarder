@@ -44,11 +44,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _Available: 1
+    - _MildBorderHighlight: 0.197
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Selected: 0
     m_Colors:
     - _Color: {r: 0.09843356, g: 0.26415086, b: 0.10067416, a: 0}
+    - _SelectionHighlight: {r: 2.5442057, g: 1.3101323, b: 0.5461384, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7408180141134185666
 MonoBehaviour:

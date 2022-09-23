@@ -32,6 +32,8 @@ public class HexGrid : Singleton<HexGrid>
     public MainBase mainBasePrefab;
     public OakTree oakTreePrefab;
     public Lake lakePrefab;
+    public BeaverTradePost beaverTradePostPrefab;
+    public MoleTradePost moleTradePostPrefab;
     [Space]
     public MainBase mainBaseInstance;
     public List<HexCellContent> productionSites = new List<HexCellContent>();
@@ -80,6 +82,7 @@ public class HexGrid : Singleton<HexGrid>
                 return cells[r];
         }
     }
+
 
 
 
@@ -132,7 +135,7 @@ public class HexGrid : Singleton<HexGrid>
 		TMP_Text label = Instantiate<TMP_Text>(cellLabelPrefab);
 		label.rectTransform.SetParent(gridCanvas.transform, false);
 		label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
-		label.text = cell.coordinates.ToStringOnSeparateLines();  
+		//label.text = cell.coordinates.ToStringOnSeparateLines();  
 
         cell.label = label;  
     }
@@ -141,11 +144,38 @@ public class HexGrid : Singleton<HexGrid>
     {
         if (Input.GetMouseButtonDown(0)) 
         {
-			HandleInput();
+			HandleLeftMousePressed();
 		}
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            HandleLeftMouseReleased();
+        }
+
+        if(mouseButtonCurrentlyPressed)
+        {
+            if(beginSelectionPoint != Vector3.zero)
+            {
+                Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(inputRay, out hit)) 
+                {
+                    if(selectionRectangleInstance == null)
+                    {
+                        selectionRectangleInstance = Instantiate(selectionRectanglePrefab);
+                        
+                    }
+                    selectionRectangleInstance.UpdateRectangle(beginSelectionPoint, hit.point);
+                }
+            }
+        }
     }
-    void HandleInput () 
+
+    bool mouseButtonCurrentlyPressed = false;
+    void HandleLeftMousePressed () 
     {
+        mouseButtonCurrentlyPressed = true;
+        beginSelectionPoint = Vector3.zero;
 		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast(inputRay, out hit)) 
@@ -153,13 +183,101 @@ public class HexGrid : Singleton<HexGrid>
 			TouchCell(hit.point);
 		}
     }
-	
-    void TouchCell (Vector3 position) 
+
+    public SelectionRectangle selectionRectanglePrefab;
+    public SelectionRectangle selectionRectangleInstance;
+
+    void HandleLeftMouseReleased()
     {
-        position = transform.InverseTransformPoint(position);
+        mouseButtonCurrentlyPressed = false;
+
+        if(selectionRectangleInstance != null)
+            Destroy(selectionRectangleInstance.gameObject);
+
+        //try to select units
+        if(UIManagement.Instance.selectionMode == SelectionMode.CommandUnits)
+        {
+            Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(inputRay, out hit)) 
+            {
+                if(beginSelectionPoint == Vector3.zero)
+                {
+                    return;
+                }
+
+                endSelectionPoint = hit.point;
+
+                Vector3 min = new Vector3(
+                    beginSelectionPoint.x < endSelectionPoint.x ? beginSelectionPoint.x : endSelectionPoint.x,
+                    0.0f,
+                    beginSelectionPoint.z < endSelectionPoint.z ? beginSelectionPoint.z : endSelectionPoint.z);
+                Vector3 max = new Vector3(
+                    beginSelectionPoint.x > endSelectionPoint.x ? beginSelectionPoint.x : endSelectionPoint.x,
+                    0.0f,
+                    beginSelectionPoint.z > endSelectionPoint.z ? beginSelectionPoint.z : endSelectionPoint.z);
+
+                for (int i = 0; i < allSquirrels.Count; i++)
+                {
+                    var current = allSquirrels[i];
+                    Vector3 position = current.transform.position;
+                    if(position.x > min.x && position.x < max.x && position.z > min.z && position.z < max.z)
+                    {
+                        current.SetHighlight();
+                        selectedSquirrels.Add(current);
+                    }
+                }
+
+                beginSelectionPoint = Vector3.zero;
+                endSelectionPoint = Vector3.zero;
+            
+                if(selectedSquirrels.Count > 0)
+                {
+                    foreach (var cell in cells)
+                    {
+                        if(cell.content != null && cell.content.IsInteractable)
+                        {
+                            highlightedCells.Add(cell);
+                            cell.SetSelected();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    List<HexCell> highlightedCells = new List<HexCell>();
+
+    void ClearSquirrelHighlights()
+    {
+        foreach (var s in selectedSquirrels)
+        {
+            s.RemoveHighlight();
+        }
+        foreach (var cell in highlightedCells)
+        {
+            cell.SetSelected();
+        }
+        selectedSquirrels.Clear();
+        highlightedCells.Clear();
+    }
+
+    Vector3 beginSelectionPoint = Vector3.zero;
+	Vector3 endSelectionPoint = Vector3.zero;
+    public List<SquirrelBehaviour> selectedSquirrels = new List<SquirrelBehaviour>();
+    public List<SquirrelBehaviour> allSquirrels = new List<SquirrelBehaviour>();
+
+    public HexCell CellFromPosition(Vector3 wsPosition)
+    {
+        var position = transform.InverseTransformPoint(wsPosition);
 		HexCoordinates coordinates = HexCoordinates.FromPosition(position);
         int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
-		HexCell cell = cells[index];
+		return cells[index];
+    }
+
+    void TouchCell (Vector3 position) 
+    {
+		HexCell cell = CellFromPosition(position);
 
         var selectionMode = UIManagement.Instance.selectionMode;
         switch(selectionMode)
@@ -190,7 +308,27 @@ public class HexGrid : Singleton<HexGrid>
 
                 break;
             }
+            case SelectionMode.CommandUnits:
+            {
+                if(selectedSquirrels.Count != 0 && cell.isOccupied && cell.content.IsInteractable)
+                {
+                    Debug.Log("Clicked on something valid!");
+                    foreach (var squirrel in selectedSquirrels)
+                    {
+                        squirrel.IssueWork(mainBaseInstance, cell.content);
+                    }
+                    //Issue commands on the squirrels
+                }
+                ClearSquirrelHighlights();
+                beginSelectionPoint = position;
+                break;
+            }
         }
+    }
+
+    public void OnUpdateSelectionMode(SelectionMode newMode)
+    {   
+        ClearSquirrelHighlights();
     }
 
     public delegate void Notify();  // delegate
@@ -219,6 +357,8 @@ public class HexGrid : Singleton<HexGrid>
         {
             Debug.Log("Max Length Error!");
         }
+
+        path.Reverse();
         return path;
     }
 
@@ -246,6 +386,14 @@ public class HexGrid : Singleton<HexGrid>
 				HexCell neighbor = current.GetNeighbor(d);
 				if (neighbor == null || neighbor.Distance != int.MaxValue) 
                     continue;
+
+                if(neighbor == toCell) //does not matter if the goal cell is unwalkable
+                {
+                    toCell.previous = current;
+                    toCell.Distance = current.Distance + 1;
+                    return TracePath(fromCell, toCell);                                    
+                }
+                
                 
                 if(neighbor.isOccupied)
                     continue;

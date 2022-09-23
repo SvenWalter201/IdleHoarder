@@ -15,4 +15,11 @@ public class BeaverTradePost : TradePost
         base.Destruct();
         HexGrid.Instance.beaverTradePost = null;
     }
+
+    public override ECurrency RequiredResource => ECurrency.Acorn;
+    public override ECurrency ProducingResource => ECurrency.Wood;
+    public override string Name => "Beaver Trading Post";
+
+
+
 }

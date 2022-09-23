@@ -2,15 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct ResourceContainer
+[System.Serializable]
+public class ResourceContainer
 {
-    public int acorn, wood, water, stone;
+    public int[] storedResources = new int[4];
+    public int[] capacities = new int[4];
 }
 
 public class HexCellContent : MonoBehaviour
 {
+    public ResourceContainer currentlyStoredResources;
+
     public virtual bool IsDestructible => true;
-    public virtual ResourceContainer GetCost() {return default; }
+    public virtual bool IsInteractable => true;
+    public virtual ResourceContainer Storable => new ResourceContainer();
+    public virtual string Name => "DefaultContent";
+
+    public virtual ECurrency RequiredResource => ECurrency.Acorn;
+    public virtual ResourceContainer Retrievable => new ResourceContainer();
+
+    public virtual ResourceContainer GetCost() {return new ResourceContainer(); }
 
     public HexCell hexCellReference;
 
@@ -21,9 +32,46 @@ public class HexCellContent : MonoBehaviour
 
     public virtual bool SpawnConditions => true;
 
+    void Update() 
+    {
+        ContentUpdate();
+    }
+
+    public virtual void ContentUpdate()
+    {
+
+    }
 
     public virtual void Destruct()
     {
 
+    }
+
+    public void UpdateInventoryUI()
+    {
+
+    }
+
+    public virtual void Store(ResourceContainer input, int type) =>
+        ExchangeResources(input, currentlyStoredResources, type);
+
+    public void Take(ResourceContainer input, int type) =>
+        ExchangeResources(currentlyStoredResources, input, type);
+
+    public virtual void ExchangeResources(ResourceContainer giver, ResourceContainer taker, int typeIndex)
+    {
+        int takerRemainingSpace = taker.capacities[typeIndex] - taker.storedResources[typeIndex];
+        if(takerRemainingSpace >= giver.storedResources[typeIndex])
+        {
+            taker.storedResources[typeIndex] += giver.storedResources[typeIndex];
+            giver.storedResources[typeIndex] = 0;
+        } 
+        else
+        {
+            taker.storedResources[typeIndex] += takerRemainingSpace;
+            giver.storedResources[typeIndex] -= takerRemainingSpace;            
+        }
+
+        UIManagement.Instance.UpdateCurrencyPanels();
     }
 }

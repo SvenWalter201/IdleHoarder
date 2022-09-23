@@ -36,6 +36,16 @@ public class HexCellEditor : Editor
                     tgt.SetContent(HexGrid.Instance.oakTreePrefab);
                     break;
                 }
+                case EContentType.BeaverTradingPost:
+                {
+                    tgt.SetContent(HexGrid.Instance.beaverTradePostPrefab);
+                    break;
+                }
+                case EContentType.MoleTradingPost:
+                {
+                    tgt.SetContent(HexGrid.Instance.moleTradePostPrefab);
+                    break;
+                }
                 case EContentType.None: 
                 {
                     break;

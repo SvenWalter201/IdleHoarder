@@ -5,8 +5,11 @@ using UnityEngine;
 public class Village : HexCellContent
 {
     public override bool IsDestructible => true;
+    public override bool IsInteractable => false;
     public override ResourceContainer GetCost()
     {
-        return new ResourceContainer { acorn = 10};
+        var c = new ResourceContainer();
+        c.storedResources[0] = 10;
+        return c;
     }
 }

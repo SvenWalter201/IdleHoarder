@@ -9,15 +9,35 @@ public static class Global
     public static bool BuyContent(HexCellContent cellContent)
     {
         var cost = cellContent.GetCost();
-        if(acornAmount - cost.acorn >= 0 && woodAmount - cost.wood >= 0 && waterAmount - cost.water >= 0 && stoneAmount - cost.stone >= 0)
+
+        if(cost.storedResources[0] == 0 && cost.storedResources[1] == 0 && cost.storedResources[2] == 0 && cost.storedResources[3] == 0)
         {
-            acornAmount -= cost.acorn;
-            woodAmount -= cost.wood;
-            waterAmount -= cost.water;
-            stoneAmount -= cost.stone;
+            return true;
+        }
+        
+        var mainBase = HexGrid.Instance.mainBaseInstance;
+        if(mainBase == null)
+        {
+            Debug.Log("Build Main Base first");
+            return false;
+        }
 
+        var availableResources = mainBase.currentlyStoredResources.storedResources;
+
+        bool canBuy = true;
+        for (int i = 0; i < 4; i++)
+        {
+            if(availableResources[i] < cost.storedResources[i]) 
+            {
+                canBuy = false;
+                break;
+            }
+        }
+        if(canBuy)
+        {
+            for (int i = 0; i < 4; i++)
+                availableResources[i] -= cost.storedResources[i];
             UIManagement.Instance.UpdateCurrencyPanels();
-
             return true;
         }
         return false;

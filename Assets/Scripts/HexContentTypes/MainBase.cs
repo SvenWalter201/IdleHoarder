@@ -5,6 +5,8 @@ using UnityEngine;
 public class MainBase : HexCellContent
 {
     public override bool IsDestructible => false;
+    public override bool IsInteractable => false;
+    public override string Name => "Main Base";
 
     public override bool SpawnConditions => HexGrid.Instance.mainBaseInstance == null;
 

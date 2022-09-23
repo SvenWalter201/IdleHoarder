@@ -128,3 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1ec662022ef1249999a27d945c024d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentlyStoredResources:
+    storedResources: 00000000000000000000000000000000
+    capacities: 64000000000000000000000000000000
+  hexCellReference: {fileID: 0}
+  productionRate: 2

@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public enum ECurrency
 {
-    Acorn, Wood, Water, Stone
+    Acorn, Wood, Water, Stone, None
 }
 public class UIManagement : Singleton<UIManagement>
 {
     [SerializeField] Button toggleAvailableButton;
     [SerializeField] Button toggleVillageBuildingButton;
     [SerializeField] Button toggleDestroyBuildingButton;
+    [SerializeField] Button toggleCommandUnitsButton;
     [SerializeField] CurrencyUI acornC, woodC, waterC, stoneC;
 
     List<Button> btns = new List<Button>();
@@ -42,10 +43,12 @@ public class UIManagement : Singleton<UIManagement>
         toggleAvailableButton.colors = normal;
         toggleVillageBuildingButton.colors = normal;
         toggleDestroyBuildingButton.colors = normal;
+        toggleCommandUnitsButton.colors = normal;
 
         btns.Add(toggleAvailableButton);
         btns.Add(toggleVillageBuildingButton);
         btns.Add(toggleDestroyBuildingButton);
+        btns.Add(toggleCommandUnitsButton);
 
         selectionMode = SelectionMode.None;
     }
@@ -62,22 +65,26 @@ public class UIManagement : Singleton<UIManagement>
 
     public void UpdateCurrencyPanels()
     {
-            acornC.SetAmount(Global.acornAmount);
-            woodC.SetAmount(Global.woodAmount);
-            waterC.SetAmount(Global.waterAmount);
-            stoneC.SetAmount(Global.stoneAmount);       
+            var mainBaseStorage = HexGrid.Instance.mainBaseInstance.currentlyStoredResources.storedResources;
+
+            acornC.SetAmount(mainBaseStorage[0]);
+            woodC.SetAmount(mainBaseStorage[1]);
+            waterC.SetAmount(mainBaseStorage[2]);
+            stoneC.SetAmount(mainBaseStorage[3]);  
     }
 
-    public void ToggleAvailable()
-    {
+    public void ToggleAvailable() => 
         Toggle(toggleAvailableButton, SelectionMode.ToggleAvailable);
 
-    }
-    public void ToggleVillageBuilding()
-    {
+    public void ToggleVillageBuilding() => 
         Toggle(toggleVillageBuildingButton, SelectionMode.Build);
-    }
 
+    public void ToggleDestroy() => 
+        Toggle(toggleDestroyBuildingButton, SelectionMode.Destroy);
+      
+    public void ToggleCommandUnits() => 
+        Toggle(toggleCommandUnitsButton, SelectionMode.CommandUnits);
+    
     public void Toggle(Button btn, SelectionMode sM)
     {
         if(selectionMode == sM)
@@ -97,13 +104,12 @@ public class UIManagement : Singleton<UIManagement>
             {
                 b.colors = normal;
             }
-        }       
+        } 
+
+        HexGrid.Instance.OnUpdateSelectionMode(sM);      
     }
 
-    public void ToggleDestroy()
-    {
-        Toggle(toggleDestroyBuildingButton, SelectionMode.Destroy);
-    }    
+  
 }
 
 public enum SelectionMode
@@ -111,5 +117,6 @@ public enum SelectionMode
     Build,
     ToggleAvailable,
     Destroy,
+    CommandUnits,
     None
 }

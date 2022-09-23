@@ -15,4 +15,9 @@ public class MoleTradePost : TradePost
         base.Destruct();
         HexGrid.Instance.moleTradePost = null;
     }
+
+
+    public override ECurrency RequiredResource => ECurrency.Water;
+    public override ECurrency ProducingResource => ECurrency.Stone;
+    public override string Name => "Mole Trading Post";
 }
