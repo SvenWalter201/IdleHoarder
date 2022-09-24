@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
-    float panSpeed;
+    float panSpeed, scrollSpeed;
+
+    [SerializeField] Vector2 zoomBounds;
 
     [SerializeField] Vector2 minBound, maxBound;
 
@@ -38,6 +40,17 @@ public class CameraMovement : MonoBehaviour
         {
             transform.position += Vector3.forward * z * panSpeed * Time.deltaTime;
             
+        }
+
+        Vector2 scrollDelta = Input.mouseScrollDelta;
+        transform.position += Vector3.up * -scrollDelta.y  * scrollSpeed;
+        if(transform.position.y > zoomBounds.y)
+        {
+            transform.position = new Vector3(transform.position.x, zoomBounds.y, transform.position.z);
+        }
+        else if(transform.position.y < zoomBounds.x)
+        {
+            transform.position = new Vector3(transform.position.x, zoomBounds.x, transform.position.z);
         }
     }
 }

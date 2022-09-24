@@ -17,6 +17,8 @@ public class HexCellContent : MonoBehaviour
     public InventoryUI inventoryUIPrefab;
     [HideInInspector] public InventoryUI inventoryUIInstance;
 
+    public List<GameObject> meshPrefabList = new List<GameObject>();
+
     public Transform upperPosition;
     public ResourceContainer currentlyStoredResources;
 
@@ -39,6 +41,13 @@ public class HexCellContent : MonoBehaviour
     public virtual void Initialize(HexCell hexCell)
     {
         hexCellReference = hexCell;
+        if(meshPrefabList.Count > 0)
+        {
+            int r = Random.Range(0, meshPrefabList.Count);
+            var meshToInstantiate = meshPrefabList[r];
+            var meshInstance = Instantiate(meshToInstantiate, transform.position, Quaternion.identity);
+            meshInstance.transform.SetParent(meshObject.transform, true);
+        }
     }
 
     public virtual bool SpawnConditions => true;

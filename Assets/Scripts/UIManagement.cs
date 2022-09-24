@@ -55,8 +55,8 @@ public class UIManagement : Singleton<UIManagement>
     {
         normalColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
         highlightedColor = new Color(1.0f, 0f, 0f, 1.0f),
-        pressedColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
-        selectedColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
+        pressedColor = new Color(0.0f, 1.00f, 0f, 1.0f),
+        selectedColor = new Color(0.0f, 0f, 1.0f, 1.0f),
         disabledColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
         colorMultiplier = 1
     };

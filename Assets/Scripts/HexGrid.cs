@@ -341,7 +341,7 @@ public class HexGrid : Singleton<HexGrid>
             }
             case SelectionMode.Village:
             {
-                if(cell.isOccupied)
+                if(cell.isOccupied || !cell.isAvailable)
                     return;
                 
                 if(cell.SetContent(villagePrefab))
