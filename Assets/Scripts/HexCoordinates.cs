@@ -65,7 +65,7 @@ public class HexCoordinates
     {
 		float x = position.x / (HexMetrics.innerRadius * 2f);
 		float y = -x;
-        		float offset = position.z / (HexMetrics.outerRadius * 3f);
+        float offset = position.z / (HexMetrics.outerRadius * 3f);
 		x -= offset;
 		y -= offset;
         
