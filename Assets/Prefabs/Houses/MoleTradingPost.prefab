@@ -93,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2719481369255122115}
   - component: {fileID: 4992440122231823792}
-  m_Layer: 0
+  - component: {fileID: 5625748589979266983}
+  m_Layer: 8
   m_Name: MoleTradingPost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6b877b0a94cb54cb205de4f1cc1c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detailInformationPrefab: {fileID: 8819984562951719075, guid: 9dd585e43f92a2e4ea0ef679a3cecc41,
+    type: 3}
+  detailInformationInstance: {fileID: 0}
   inventoryUIPrefab: {fileID: 6615736418308983410, guid: 5cf507a00c7f57c43ba48f79bffb19a3,
     type: 3}
   inventoryUIInstance: {fileID: 0}
@@ -140,6 +144,19 @@ MonoBehaviour:
   hexCellReference: {fileID: 0}
   cellCurrentlyAvailable: 1
   productionRate: 3
+--- !u!135 &5625748589979266983
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627758881302167467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8137835125030100985
 GameObject:
   m_ObjectHideFlags: 0

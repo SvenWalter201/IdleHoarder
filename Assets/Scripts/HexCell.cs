@@ -180,6 +180,7 @@ public class HexCell : MonoBehaviour
     {
         if(content.IsDestructible)
         {
+            content.HideDetails();  
             Destroy(content.gameObject);
             isOccupied = false;
             return true;

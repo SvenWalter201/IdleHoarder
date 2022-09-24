@@ -13,7 +13,8 @@ public class UIManagement : Singleton<UIManagement>
     [SerializeField] Button toggleAvailableButton;
     [SerializeField] Button toggleVillageBuildingButton;
     [SerializeField] Button toggleDestroyBuildingButton;
-    [SerializeField] Button toggleCommandUnitsButton;
+    //[SerializeField] Button toggleCommandUnitsButton;
+    [SerializeField] Button toggleBuildingModeButton;
     [SerializeField] CurrencyUI acornC, woodC, waterC, stoneC;
 
     List<Button> btns = new List<Button>();
@@ -39,19 +40,25 @@ public class UIManagement : Singleton<UIManagement>
     };
     public SelectionMode selectionMode;
 
-    private void Awake() {
+    void Awake() 
+    {
         toggleAvailableButton.colors = normal;
         toggleVillageBuildingButton.colors = normal;
         toggleDestroyBuildingButton.colors = normal;
-        toggleCommandUnitsButton.colors = normal;
+        toggleBuildingModeButton.colors = normal;
+        //toggleCommandUnitsButton.colors = normal;
 
         btns.Add(toggleAvailableButton);
         btns.Add(toggleVillageBuildingButton);
         btns.Add(toggleDestroyBuildingButton);
-        btns.Add(toggleCommandUnitsButton);
+        //btns.Add(toggleCommandUnitsButton);
 
-        selectionMode = SelectionMode.None;
+        toggleVillageBuildingButton.gameObject.SetActive(buildingMode);
+        toggleDestroyBuildingButton.gameObject.SetActive(buildingMode);
+
+        selectionMode = SelectionMode.CommandUnits;
     }
+
     public void SetCurrency(ECurrency currency, int amount)
     {
         switch(currency)
@@ -77,19 +84,32 @@ public class UIManagement : Singleton<UIManagement>
         Toggle(toggleAvailableButton, SelectionMode.ToggleAvailable);
 
     public void ToggleVillageBuilding() => 
-        Toggle(toggleVillageBuildingButton, SelectionMode.Build);
+        Toggle(toggleVillageBuildingButton, SelectionMode.Village);
 
     public void ToggleDestroy() => 
         Toggle(toggleDestroyBuildingButton, SelectionMode.Destroy);
       
-    public void ToggleCommandUnits() => 
-        Toggle(toggleCommandUnitsButton, SelectionMode.CommandUnits);
+    //public void ToggleCommandUnits() => 
+    //    Toggle(toggleCommandUnitsButton, SelectionMode.CommandUnits);
+
+
+    public bool buildingMode = false;
+    public void ToggleBuildingMode()
+    {
+        Toggle(toggleBuildingModeButton, SelectionMode.Build);
+
+        buildingMode = !buildingMode;
+        toggleVillageBuildingButton.gameObject.SetActive(buildingMode);
+        toggleDestroyBuildingButton.gameObject.SetActive(buildingMode);
+
+        if(!buildingMode) selectionMode = SelectionMode.CommandUnits;
+    }
     
     public void Toggle(Button btn, SelectionMode sM)
     {
-        if(selectionMode == sM)
+        if(btn.colors == pressed)
         {
-            selectionMode = SelectionMode.None;
+            selectionMode = SelectionMode.CommandUnits;
             btn.colors = normal;
         }
         else 
@@ -115,6 +135,7 @@ public class UIManagement : Singleton<UIManagement>
 public enum SelectionMode
 {
     Build,
+    Village,
     ToggleAvailable,
     Destroy,
     CommandUnits,

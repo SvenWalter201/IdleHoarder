@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
 
         if(thingsToDisplay != currencyUIs.Count)
         {
-            int startingPos = (thingsToDisplay - 1) * 4;
+            int startingPos = (thingsToDisplay - 1) * 2;
             currencyUIs.Clear();
             for (int i = 0; i < 4; i++)
             {
@@ -34,7 +34,7 @@ public class InventoryUI : MonoBehaviour
                     currencyUIs.Add(current);
                     current.transform.SetParent(transform, false);
                     current.transform.localPosition = Vector3.up * startingPos;
-                    startingPos-=4;
+                    startingPos -= 2;
                 }
             }
         }
