@@ -124,7 +124,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2719481369255122115}
   - component: {fileID: 308725590300214124}
-  m_Layer: 0
+  - component: {fileID: 5625748589979266983}
+  m_Layer: 8
   m_Name: OakTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,6 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1ec662022ef1249999a27d945c024d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detailInformationPrefab: {fileID: 8819984562951719075, guid: da0fc7bbbf1f1974e985eccf1cc3f0a9,
+    type: 3}
+  detailInformationInstance: {fileID: 0}
   inventoryUIPrefab: {fileID: 6615736418308983410, guid: 5cf507a00c7f57c43ba48f79bffb19a3,
     type: 3}
   inventoryUIInstance: {fileID: 0}
@@ -171,3 +175,16 @@ MonoBehaviour:
   hexCellReference: {fileID: 0}
   cellCurrentlyAvailable: 1
   productionRate: 2
+--- !u!135 &5625748589979266983
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627758881302167467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}

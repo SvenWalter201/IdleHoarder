@@ -38,11 +38,6 @@ public class SquirrelBehaviour : MonoBehaviour
         states[currentStateIndex].Update();
     }
 
-    void SquirrelTransporting()
-    {
-
-    }
-
     public void ShowInventoryUI()
     {
         if(inventoryUIInstance == null)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public enum ETradePost
@@ -27,7 +28,7 @@ public class HexGrid : Singleton<HexGrid>
 
     MeshCollider meshCollider;
 
-    [SerializeField] LayerMask hexGridLayerMask, squirrelLayerMask;
+    [SerializeField] LayerMask hexGridLayerMask, squirrelLayerMask, buildingLayerMask;
 
     [SerializeField]
     public Village villagePrefab;
@@ -192,14 +193,38 @@ public class HexGrid : Singleton<HexGrid>
                     currentlyDisplayingSquirrel = null;
                 }
             }
+
+            if (Physics.Raycast(inputRay, out hit, 1000.0f, buildingLayerMask)) 
+            {
+                var buildingHit = hit.collider.gameObject.GetComponent<HexCellContent>();
+                if(currentlyDisplayingBuilding == null)
+                {
+                    buildingHit.ShowDetails();
+                    currentlyDisplayingBuilding = buildingHit;
+                }
+            }
+            else
+            {
+                if(currentlyDisplayingBuilding != null)
+                {
+                    currentlyDisplayingBuilding.HideDetails();
+                    currentlyDisplayingBuilding = null;
+                }
+            }
         }
+
+        
     }
 
     SquirrelBehaviour currentlyDisplayingSquirrel;
-
+    HexCellContent currentlyDisplayingBuilding;
     bool mouseButtonCurrentlyPressed = false;
     void HandleLeftMousePressed () 
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         mouseButtonCurrentlyPressed = true;
         beginSelectionPoint = Vector3.zero;
 		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -314,7 +339,7 @@ public class HexGrid : Singleton<HexGrid>
                 OnGridUpdate?.Invoke();
                 break;
             }
-            case SelectionMode.Build:
+            case SelectionMode.Village:
             {
                 if(cell.isOccupied)
                     return;
@@ -341,7 +366,7 @@ public class HexGrid : Singleton<HexGrid>
                 {
                     if(Global.BuyContent(cell.buyLandMenuInstance.currentlyDisplayingInventory))
                         cell.ToggleAvailable(true);
-                        
+
                     return;
                 }
                 if(selectedSquirrels.Count != 0 && cell.isOccupied && cell.content.IsInteractable && cell.isAvailable)

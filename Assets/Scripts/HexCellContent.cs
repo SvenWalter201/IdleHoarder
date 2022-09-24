@@ -9,8 +9,11 @@ public class ResourceContainer
     public int[] capacities = new int[4];
 }
 
+[RequireComponent(typeof(SphereCollider))]
 public class HexCellContent : MonoBehaviour
 {
+    public GameObject detailInformationPrefab;
+    [HideInInspector] public GameObject detailInformationInstance;
     public InventoryUI inventoryUIPrefab;
     [HideInInspector] public InventoryUI inventoryUIInstance;
 
@@ -59,6 +62,19 @@ public class HexCellContent : MonoBehaviour
     public virtual void Destruct()
     {
 
+    }
+
+    public void ShowDetails()
+    {
+        if(detailInformationInstance == null)
+            detailInformationInstance = Instantiate(detailInformationPrefab, upperPosition.position, Quaternion.identity);
+        
+    }
+
+    public void HideDetails()
+    {
+        if(detailInformationInstance != null)
+            Destroy(detailInformationInstance.gameObject);
     }
 
     public virtual void SetAvailable(bool available)
