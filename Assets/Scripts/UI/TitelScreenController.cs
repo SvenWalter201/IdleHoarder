@@ -8,10 +8,13 @@ public class TitelScreenController : MonoBehaviour
 {
     [SerializeField]
     string NewGame = "TEST";
+    [SerializeField]
+    GameObject TitelScreen = default;
 
     public void StartGame()
     {
-        SceneManager.LoadScene(NewGame, LoadSceneMode.Single);
+        TitelScreen.SetActive(false);
+        
     }
 
     public void EndGame()

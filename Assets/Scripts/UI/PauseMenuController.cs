@@ -16,6 +16,9 @@ public class PauseMenuController : MonoBehaviour
 
     [SerializeField]
     GameObject PauseMenu = default;
+    
+    [SerializeField]
+    GameObject TitelScreen = default;
 
     private void Update()
     {
@@ -28,7 +31,7 @@ public class PauseMenuController : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(titelScreen, LoadSceneMode.Single);
+        TitelScreen.SetActive(true);
     }
 
     public void ReturnToGame()

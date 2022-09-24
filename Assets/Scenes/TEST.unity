@@ -246,6 +246,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 97012830}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &20343828
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -354,6 +356,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1086748791}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &32207586
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -462,6 +466,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1614319693}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &33676888
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -570,6 +576,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 169530506}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &37150770
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -678,6 +686,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1281492481}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &59931874
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -925,6 +935,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 2017123213}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &68276427
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1176,6 +1188,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1134259819}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &72009403
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1284,6 +1298,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 783219100}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &93747472
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1531,6 +1547,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1088823761}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &102721156
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1639,6 +1657,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 310826755}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &104683525
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2299,6 +2319,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1562192245}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &205193345
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2761,6 +2783,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1691879023}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &219475580
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3147,6 +3171,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1589895883}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &237163145
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3533,6 +3559,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 333339482}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &272467422
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4382,6 +4410,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1030916067}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &328180160
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4757,7 +4787,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1040391917}
+  - {fileID: 1778571697}
   - {fileID: 524553866}
   - {fileID: 1499972353}
   - {fileID: 1049950270}
@@ -4765,10 +4795,10 @@ RectTransform:
   m_Father: {fileID: 1325187302}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 200}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: -75}
+  m_SizeDelta: {x: 1919.9999, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &338234139
 MonoBehaviour:
@@ -4783,15 +4813,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 374ea44cd6ee9cf4bbe8ca47efce45a2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5036,6 +5066,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 128105429}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &344801849
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5283,6 +5315,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 338757254}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &383688813
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5669,6 +5703,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 272921520}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &391499192
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5916,6 +5952,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1191846990}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &397499158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6163,6 +6201,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1759032655}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &421296196
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6271,6 +6311,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 697674076}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &423026092
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6379,6 +6421,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1200485800}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &434873185
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6540,6 +6584,141 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445813336}
+  m_CullTransparentMesh: 1
+--- !u!1 &447023687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447023688}
+  - component: {fileID: 447023690}
+  - component: {fileID: 447023689}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &447023688
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447023687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1778571697}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &447023689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447023687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 999
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &447023690
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447023687}
   m_CullTransparentMesh: 1
 --- !u!1001 &461957782
 PrefabInstance:
@@ -6768,6 +6947,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 149012892}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &473984632
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6876,6 +7057,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 973786543}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &485606799
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7262,6 +7445,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 744353133}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &511481566
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7513,7 +7698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc8defdce0d689b43874a557e1bddb45, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7574,6 +7759,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 829075943}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &533535776
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8099,6 +8286,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 598703523}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &577215188
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8346,6 +8535,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 240831489}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &589397089
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9847,6 +10038,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 276176279}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &650682448
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10094,6 +10287,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 627247030}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &669646458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10202,6 +10397,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1176160857}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &672187034
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10310,6 +10507,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 488096812}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &682907611
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10418,6 +10617,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1747820027}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &694104209
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11058,6 +11259,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 564791241}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &736440104
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11166,6 +11369,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 252077606}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &743755883
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11413,6 +11618,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1371477819}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &748474350
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11533,6 +11740,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1623191374}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &763535909
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11759,6 +11968,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1334630008}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &774166290
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12006,6 +12217,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 2034223744}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &791581461
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12359,6 +12572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 801367797}
   - component: {fileID: 801367796}
+  - component: {fileID: 801367798}
   m_Layer: 0
   m_Name: MainBase(Clone)
   m_TagString: Untagged
@@ -12378,10 +12592,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f4b6b32d50b394da4a3179ba2da95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detailInformationPrefab: {fileID: 0}
+  detailInformationInstance: {fileID: 0}
+  inventoryUIPrefab: {fileID: 0}
+  inventoryUIInstance: {fileID: 0}
+  upperPosition: {fileID: 0}
   currentlyStoredResources:
     storedResources: 00000000000000000000000000000000
     capacities: 00000000000000000000000000000000
+  meshObject: {fileID: 0}
   hexCellReference: {fileID: 1342030601}
+  cellCurrentlyAvailable: 1
 --- !u!4 &801367797
 Transform:
   m_ObjectHideFlags: 0
@@ -12398,6 +12619,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &801367798
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801367795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &818176709
 GameObject:
   m_ObjectHideFlags: 0
@@ -12441,6 +12675,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 485829586}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &818176711
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12549,6 +12785,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1015398624}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &819365470
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12657,6 +12895,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1011182068}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &821665089
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13043,6 +13283,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 553747482}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &855216531
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13163,6 +13405,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 990679298}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &920307621
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13340,6 +13584,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1372559436}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &925121985
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13865,6 +14111,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 2038536217}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &975261126
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13973,6 +14221,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 2145572214}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &984281244
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14220,6 +14470,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1338948967}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &990852949
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14328,6 +14580,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1646175541}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &997999793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14575,6 +14829,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 399580880}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1012889990
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15028,6 +15284,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1707757250}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1031227788
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15136,6 +15394,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1826299232}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1032256508
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15275,12 +15535,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040391916}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 338234137}
+  m_Father: {fileID: 1778571697}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -15308,7 +15568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7384c29b4e893b14192d40b78ea5d568, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15339,8 +15599,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 80
-  m_MinHeight: 80
+  m_MinWidth: 35
+  m_MinHeight: 35
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -15564,7 +15824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e406d2ebd7d764347a654bfc17922396, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15625,6 +15885,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1714730958}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1052900664
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16625,6 +16887,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 629296416}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1092802607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16733,6 +16997,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1645285049}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1093372254
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16841,6 +17107,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 222207752}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1097435893
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17055,6 +17323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1127430219}
   - component: {fileID: 1127430218}
+  - component: {fileID: 1127430220}
   m_Layer: 0
   m_Name: OakTree(Clone)
   m_TagString: Untagged
@@ -17074,10 +17343,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1ec662022ef1249999a27d945c024d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detailInformationPrefab: {fileID: 0}
+  detailInformationInstance: {fileID: 0}
+  inventoryUIPrefab: {fileID: 0}
+  inventoryUIInstance: {fileID: 0}
+  upperPosition: {fileID: 0}
   currentlyStoredResources:
     storedResources: 00000000000000000000000000000000
     capacities: 00000000000000000000000000000000
+  meshObject: {fileID: 0}
   hexCellReference: {fileID: 1787149390}
+  cellCurrentlyAvailable: 1
   productionRate: 0.5
 --- !u!4 &1127430219
 Transform:
@@ -17095,6 +17371,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1127430220
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127430217}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1134259817
 GameObject:
   m_ObjectHideFlags: 0
@@ -17313,7 +17602,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e3c65ddb1c8c9a24d898a1d9fa82fc65, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17652,6 +17941,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 2038744812}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1178455246
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18509,6 +18800,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 357505825}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1242222208
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18617,6 +18910,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 970840171}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1243125003
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18860,6 +19155,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1092466775}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1268490851
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19107,6 +19404,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 388970468}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1287156294
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19354,6 +19653,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 583330618}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1303831982
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19667,12 +19968,13 @@ MonoBehaviour:
   toggleAvailableButton: {fileID: 596007942}
   toggleVillageBuildingButton: {fileID: 1941434255}
   toggleDestroyBuildingButton: {fileID: 1892183950}
-  toggleCommandUnitsButton: {fileID: 0}
+  toggleBuildingModeButton: {fileID: 0}
   acornC: {fileID: 760667541}
   woodC: {fileID: 1059182418}
   waterC: {fileID: 884315151}
   stoneC: {fileID: 1195195254}
   selectionMode: 0
+  buildingMode: 0
 --- !u!114 &1325187299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20094,6 +20396,8 @@ MonoBehaviour:
   content: {fileID: 801367796}
   previous: {fileID: 0}
   label: {fileID: 800873717}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1342030602
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20341,6 +20645,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1575125113}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1355195419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20727,6 +21033,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1147303487}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1381203656
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20835,6 +21143,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1591886936}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1384443495
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20943,6 +21253,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 60437991}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1391915034
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21051,6 +21363,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1862453712}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1392833512
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21256,6 +21570,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1295226377}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1401539357
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21652,6 +21968,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 317215761}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1488323225
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21857,6 +22175,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1677458091}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1502924349
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21965,6 +22285,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1066719704}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1504997890
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22212,6 +22534,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 946854290}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1557514656
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23114,6 +23438,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 391835421}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1593271447
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23486,6 +23812,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 234372053}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1616374988
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23594,6 +23922,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1728457783}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1620438891
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23841,6 +24171,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 215074619}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1634633749
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24104,6 +24436,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1982743715}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1644808433
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24490,6 +24824,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1070852136}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1656452681
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25031,6 +25367,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 840348365}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1696651533
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25139,6 +25477,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1351617729}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1703402167
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25386,6 +25726,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 663893994}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1714303208
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25980,6 +26322,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1309703401}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1753295168
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26184,6 +26528,132 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759032653}
   m_CullTransparentMesh: 1
+--- !u!1 &1778571696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778571697}
+  - component: {fileID: 1778571701}
+  - component: {fileID: 1778571700}
+  - component: {fileID: 1778571699}
+  - component: {fileID: 1778571698}
+  m_Layer: 5
+  m_Name: Acorns
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1778571697
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778571696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1040391917}
+  - {fileID: 447023688}
+  m_Father: {fileID: 338234137}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1778571698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778571696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 144
+  m_MinHeight: 108
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &1778571699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778571696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 30
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &1778571700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778571696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7c3c4ed68c0afa842a3866d4185e2fdd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1778571701
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778571696}
+  m_CullTransparentMesh: 1
 --- !u!1 &1783992020
 GameObject:
   m_ObjectHideFlags: 0
@@ -26338,6 +26808,8 @@ MonoBehaviour:
   content: {fileID: 1127430218}
   previous: {fileID: 0}
   label: {fileID: 1550327429}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1787149391
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26446,6 +26918,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 598244208}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1799797371
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26693,6 +27167,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 559542040}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1859552210
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27161,6 +27637,15 @@ MonoBehaviour:
   - {fileID: 1656452680}
   - {fileID: 2079869576}
   - {fileID: 669646457}
+  hexGridLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  squirrelLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  buildingLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   villagePrefab: {fileID: 3145720958774382515, guid: 932e9386d4496904eb13cd324ae5685c,
     type: 3}
   mainBasePrefab: {fileID: 6274454528887695381, guid: a44f15701a193cf48acbefb997b492b2,
@@ -27544,6 +28029,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1965224008}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1899839903
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27652,6 +28139,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 613744327}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1923378847
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27760,6 +28249,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 216663282}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1931303236
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28023,6 +28514,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 334807231}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1942000320
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28226,6 +28719,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1484369592}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1946843356
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28334,6 +28829,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1047733095}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1957281947
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28581,6 +29078,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1102674841}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1966001491
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28828,6 +29327,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 617028627}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1991357233
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28936,6 +29437,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1216059749}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &1999493749
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29428,6 +29931,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 606656643}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &2027177794
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29953,6 +30458,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 796894115}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &2040386361
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30200,6 +30707,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 388894841}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &2079869577
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30308,6 +30817,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 1999665489}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &2102970358
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30416,6 +30927,8 @@ MonoBehaviour:
   content: {fileID: 0}
   previous: {fileID: 0}
   label: {fileID: 2072210032}
+  buyLandMenuPrefab: {fileID: 0}
+  buyLandMenuInstance: {fileID: 0}
 --- !u!23 &2137043498
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public enum ECurrency
 }
 public class UIManagement : Singleton<UIManagement>
 {
+
+    [SerializeField] GameObject buildMenu;
     [SerializeField] Button toggleAvailableButton;
     [SerializeField] Button toggleVillageBuildingButton;
     [SerializeField] Button toggleDestroyBuildingButton;
@@ -19,23 +21,43 @@ public class UIManagement : Singleton<UIManagement>
 
     List<Button> btns = new List<Button>();
 
+    ColorBlock buildModePressed = new ColorBlock
+    {
+        normalColor = new Color(0.63f, 0.16f, 0.05f, 1.0f),
+        highlightedColor = new Color(0.63f, 0.16f, 0.05f, 1.0f),
+        pressedColor = new Color(0.63f, 0.16f, 0.05f, 1.0f),
+        selectedColor = new Color(0.63f, 0.16f, 0.05f, 1.0f),
+        disabledColor = new Color(0.63f, 0.16f, 0.05f, 1.0f),
+        colorMultiplier = 1
+    };
+
+    ColorBlock BuildModeNormal = new ColorBlock
+    {
+        normalColor = new Color(0.53f, 0.24f, 0.03f, 1.0f),
+        highlightedColor = new Color(0.53f, 0.24f, 0.03f, 1.0f),
+        pressedColor = new Color(0.53f, 0.24f, 0.03f, 1.0f),
+        selectedColor = new Color(0.53f, 0.24f, 0.03f, 1.0f),
+        disabledColor = new Color(0.53f, 0.24f, 0.03f, 1.0f),
+        colorMultiplier = 1
+    };
+
     ColorBlock pressed = new ColorBlock
     {
-        normalColor = new Color(1.0f, 0.0f, 0.0f, 1.0f),
-        highlightedColor = new Color(1.0f, 0.0f, 0.0f, 1.0f),
-        pressedColor = new Color(1.0f, 0.0f, 0.0f, 1.0f),
-        selectedColor = new Color(1.0f, 0.0f, 0.0f, 1.0f),
-        disabledColor = new Color(1.0f, 0.0f, 0.0f, 1.0f),
+        normalColor = new Color(0.8f, 0f, 0f, 1.0f),
+        highlightedColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
+        pressedColor = new Color(0.8f, 0f, 0f, 1.0f),
+        selectedColor = new Color(0.8f, 0f, 0f, 1.0f),
+        disabledColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
         colorMultiplier = 1
     };
 
     ColorBlock normal = new ColorBlock
     {
-        normalColor = new Color(0.0f, 1.0f, 0.0f, 1.0f),
-        highlightedColor = new Color(0.0f, 1.0f, 0.0f, 1.0f),
-        pressedColor = new Color(0.0f, 1.0f, 0.0f, 1.0f),
-        selectedColor = new Color(0.0f, 1.0f, 0.0f, 1.0f),
-        disabledColor = new Color(0.0f, 1.0f, 0.0f, 1.0f),
+        normalColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
+        highlightedColor = new Color(1.0f, 0f, 0f, 1.0f),
+        pressedColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
+        selectedColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
+        disabledColor = new Color(0.7f, 0.7f, 0.7f, 1.0f),
         colorMultiplier = 1
     };
     public SelectionMode selectionMode;
@@ -45,7 +67,7 @@ public class UIManagement : Singleton<UIManagement>
         toggleAvailableButton.colors = normal;
         toggleVillageBuildingButton.colors = normal;
         toggleDestroyBuildingButton.colors = normal;
-        toggleBuildingModeButton.colors = normal;
+        toggleBuildingModeButton.colors = BuildModeNormal;
         //toggleCommandUnitsButton.colors = normal;
 
         btns.Add(toggleAvailableButton);
@@ -53,9 +75,9 @@ public class UIManagement : Singleton<UIManagement>
         btns.Add(toggleDestroyBuildingButton);
         //btns.Add(toggleCommandUnitsButton);
 
-        toggleVillageBuildingButton.gameObject.SetActive(buildingMode);
-        toggleDestroyBuildingButton.gameObject.SetActive(buildingMode);
-
+        //toggleVillageBuildingButton.gameObject.SetActive(buildingMode);
+        //toggleDestroyBuildingButton.gameObject.SetActive(buildingMode);
+        buildMenu.SetActive(buildingMode);
         selectionMode = SelectionMode.CommandUnits;
     }
 
@@ -96,11 +118,31 @@ public class UIManagement : Singleton<UIManagement>
     public bool buildingMode = false;
     public void ToggleBuildingMode()
     {
-        Toggle(toggleBuildingModeButton, SelectionMode.Build);
+        if(toggleBuildingModeButton.colors == buildModePressed)
+        {
+            selectionMode = SelectionMode.CommandUnits;
+            toggleBuildingModeButton.colors = BuildModeNormal;
+        }
+        else 
+        {
+            toggleBuildingModeButton.colors = buildModePressed;
+            selectionMode = SelectionMode.Build;
+        } 
+
+        foreach (var b in btns)
+        {
+            if(b != toggleBuildingModeButton)
+            {
+                b.colors = normal;
+            }
+        } 
+
+        HexGrid.Instance.OnUpdateSelectionMode(SelectionMode.Build);
 
         buildingMode = !buildingMode;
-        toggleVillageBuildingButton.gameObject.SetActive(buildingMode);
-        toggleDestroyBuildingButton.gameObject.SetActive(buildingMode);
+        buildMenu.SetActive(buildingMode);
+        //toggleVillageBuildingButton.gameObject.SetActive(buildingMode);
+        //toggleDestroyBuildingButton.gameObject.SetActive(buildingMode);
 
         if(!buildingMode) selectionMode = SelectionMode.CommandUnits;
     }
