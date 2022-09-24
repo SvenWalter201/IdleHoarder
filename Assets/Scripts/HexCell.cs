@@ -57,8 +57,81 @@ public class HexCell : MonoBehaviour
                 content.SetAvailable(isAvailable);
             }
         }
-           
-       
+
+        SetBuyLandMenu(true);
+
+    }
+
+    public void SetBuyLandMenu(bool cascade)
+    {
+        if(!isAvailable)
+        {
+            bool foundAvailableNeighbor = false;
+            for (int i = 0; i < neighbors.Length; i++)
+            {
+                if(neighbors[i] != null && neighbors[i].isAvailable)
+                {
+                    foundAvailableNeighbor = true;
+
+                    break;
+                }
+            }
+
+            if(foundAvailableNeighbor)
+            {
+                var cost = new ResourceContainer();
+
+                const int beginwood = 45, beginWater = 65, beginStone = 80;
+                Vector3 baseLocation = HexGrid.Instance.mainBaseInstance.transform.position;
+                float distance = (baseLocation - transform.position).magnitude;
+                int acornCost = Mathf.RoundToInt((distance / 15.0f) * (distance / 15.0f) * (distance / 15.0f));
+                int woodCost = Mathf.RoundToInt(Mathf.Max(0.0f, ((distance - beginwood) / 15.0f) * ((distance - beginwood)  / 15.0f) * ((distance - beginwood)  / 15.0f)));
+                int waterCost = Mathf.RoundToInt(Mathf.Max(0.0f, ((distance - beginWater)  / 15.0f) * ((distance - beginWater)  / 15.0f) * ((distance - beginWater)  / 15.0f)));
+                int stoneCost = Mathf.RoundToInt(Mathf.Max(0.0f, ((distance - beginStone)  / 15.0f) * ((distance - beginStone)  / 15.0f) * ((distance - beginStone)  / 15.0f)));
+
+                cost.capacities[0] = acornCost;
+                cost.storedResources[0] = acornCost;
+                cost.capacities[1] = woodCost;
+                cost.storedResources[1] = woodCost;                
+                cost.capacities[2] = waterCost;
+                cost.storedResources[2] = waterCost;                
+                cost.capacities[3] = stoneCost;
+                cost.storedResources[3] = stoneCost;
+                if(buyLandMenuInstance == null)
+                {
+                    buyLandMenuInstance = Instantiate(buyLandMenuPrefab, transform.position + Vector3.up * 5, Quaternion.identity);
+                }
+                buyLandMenuInstance.UpdateUI(cost); 
+            }
+            else
+            {
+                if(buyLandMenuInstance != null)
+                    Destroy(buyLandMenuInstance.gameObject);
+            }
+        }
+        else
+        {
+                if(buyLandMenuInstance != null)
+                    Destroy(buyLandMenuInstance.gameObject);            
+        }
+
+        if(cascade)
+        {
+            for (int i = 0; i < neighbors.Length; i++)
+            {
+                if(neighbors[i] != null)
+                    neighbors[i].SetBuyLandMenu(false);
+            }
+        }
+
+    }
+
+    public InventoryUI buyLandMenuPrefab;
+    [HideInInspector] public InventoryUI buyLandMenuInstance;
+
+    public void GetDistanceToNextWalkable()
+    {
+
     }
 
     public void SetSelected()
@@ -66,7 +139,10 @@ public class HexCell : MonoBehaviour
         selected = !selected;
         mR.material.SetInt("_Selected", selected ? 1 : 0);
     }
-
+    public HexCell GetNeighbor (int direction) 
+    {
+		return neighbors[direction];
+	}
     public HexCell GetNeighbor (HexDirection direction) 
     {
 		return neighbors[(int)direction];
@@ -88,7 +164,7 @@ public class HexCell : MonoBehaviour
         if(!content.SpawnConditions)
             return false;
         
-        if(Global.BuyContent(content))
+        if(Global.BuyContent(content.GetCost()))
         {
             this.content = Instantiate(content, transform.position, Quaternion.identity);
             this.content.Initialize(this);

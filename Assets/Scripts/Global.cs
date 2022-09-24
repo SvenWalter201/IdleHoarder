@@ -6,9 +6,8 @@ public static class Global
 {
     public static int acornAmount, woodAmount, waterAmount, stoneAmount; //total currency
 
-    public static bool BuyContent(HexCellContent cellContent)
+    public static bool BuyContent(ResourceContainer cost)
     {
-        var cost = cellContent.GetCost();
 
         if(cost.storedResources[0] == 0 && cost.storedResources[1] == 0 && cost.storedResources[2] == 0 && cost.storedResources[3] == 0)
         {

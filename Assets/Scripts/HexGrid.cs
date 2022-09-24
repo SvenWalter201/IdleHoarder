@@ -336,6 +336,14 @@ public class HexGrid : Singleton<HexGrid>
             }
             case SelectionMode.CommandUnits:
             {
+                //if player clicks on unavailable cell, then try to buy it
+                if(!cell.isAvailable && cell.buyLandMenuInstance != null)
+                {
+                    if(Global.BuyContent(cell.buyLandMenuInstance.currentlyDisplayingInventory))
+                        cell.ToggleAvailable(true);
+                        
+                    return;
+                }
                 if(selectedSquirrels.Count != 0 && cell.isOccupied && cell.content.IsInteractable && cell.isAvailable)
                 {
                     Debug.Log("Clicked on something valid!");

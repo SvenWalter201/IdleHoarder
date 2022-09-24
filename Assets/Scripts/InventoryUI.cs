@@ -8,8 +8,11 @@ public class InventoryUI : MonoBehaviour
 
     public List<Sprite> icons = new List<Sprite>();
     public List<CurrencyUI> currencyUIs = new List<CurrencyUI>();
+
+    public ResourceContainer currentlyDisplayingInventory;
     public void UpdateUI(ResourceContainer containerToDisplay, Transform follow = null)
     {
+        currentlyDisplayingInventory = containerToDisplay;
         int thingsToDisplay = 0;
         for (int i = 0; i < 4; i++)
         {

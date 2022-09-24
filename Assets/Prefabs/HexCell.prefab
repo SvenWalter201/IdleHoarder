@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f2b756322c9df43b57177257a97360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOccupied: 0
+  isAvailable: 1
   neighbors:
   - {fileID: 0}
   - {fileID: 0}
@@ -103,3 +105,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  content: {fileID: 0}
+  previous: {fileID: 0}
+  label: {fileID: 0}
+  buyLandMenuPrefab: {fileID: 6615736418308983410, guid: 5cf507a00c7f57c43ba48f79bffb19a3,
+    type: 3}
+  buyLandMenuInstance: {fileID: 0}
