@@ -26,6 +26,9 @@ public class Lake : HexCellContent
 
     public override void ContentUpdate()
     {
+        if(!cellCurrentlyAvailable)
+            return;
+            
         base.ContentUpdate();
         productionProgress += Time.deltaTime * productionRate;
         if(productionProgress >= 1.0f)

@@ -9,6 +9,9 @@ public class SquirrelBehaviour : MonoBehaviour
 
     public ResourceContainer inventory;
     public GameObject highlightPrefab;
+    public Transform upperPoint;
+    public InventoryUI inventoryUIPrefab;
+    [HideInInspector] public InventoryUI inventoryUIInstance;
 
     GameObject highlightInstance;
     int currentStateIndex = 1;
@@ -38,6 +41,22 @@ public class SquirrelBehaviour : MonoBehaviour
     void SquirrelTransporting()
     {
 
+    }
+
+    public void ShowInventoryUI()
+    {
+        if(inventoryUIInstance == null)
+        {
+            inventoryUIInstance = Instantiate(inventoryUIPrefab, upperPoint.position, Quaternion.identity);
+            inventoryUIInstance.UpdateUI(inventory, upperPoint);
+        }
+
+    }
+
+    public void HideInventoryUI()
+    {
+        if(inventoryUIInstance != null)
+            Destroy(inventoryUIInstance.gameObject);
     }
 
     public void IssueWork(HexCellContent mainBase, HexCellContent otherDeposit)
@@ -187,9 +206,14 @@ public class TransportationWork : State
         }
 
         Vector3 nextWayPointDir = nextWayPoint - stateMachine.transform.position;
-        if(nextWayPointDir.magnitude < (HexMetrics.innerRadius * 0.1f))
+        if(nextWayPointDir.magnitude < (HexMetrics.innerRadius * 0.15f))
         {
             ++currentPathIndex;
+            if(currentPathIndex >= path.Count)
+            {
+                Debug.LogWarning("Somehow goal was not reached at the end of path?");   
+                --currentPathIndex;
+            }
             updateRandomV3 = true;
         }
 

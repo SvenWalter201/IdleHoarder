@@ -24,8 +24,16 @@ public class OakTree : HexCellContent
 
     float productionProgress = 0.0f;
 
+    public override void SetAvailable(bool available)
+    {
+        base.SetAvailable(available);
+    }
+
     public override void ContentUpdate()
     {
+        if(!cellCurrentlyAvailable)
+            return;
+            
         base.ContentUpdate();
         productionProgress += Time.deltaTime * productionRate;
         if(productionProgress >= 1.0f)

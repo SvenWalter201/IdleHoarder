@@ -32,6 +32,12 @@ public class HexCell : MonoBehaviour
     void Awake() 
     {
         mR = GetComponent<MeshRenderer>();
+        mR.material.SetInt("_Available", isAvailable ? 1 : 0);
+        transform.position += Vector3.up * 2.0f * (isAvailable ? 0 : 1);
+        if(content != null)
+        {
+            content.SetAvailable(isAvailable);
+        }
     }
 
     void Start() 
@@ -39,10 +45,19 @@ public class HexCell : MonoBehaviour
         //transform.position += Vector3.up * Random.Range(-1f, 1f);
     }
 
-    public void ToggleAvailable()
+    public void ToggleAvailable(bool updateGraphics)
     {
         isAvailable = !isAvailable;
-        mR.material.SetInt("_Available", isAvailable ? 1 : 0);
+        if(updateGraphics)
+        {
+            mR.material.SetInt("_Available", isAvailable ? 1 : 0);
+            transform.position += Vector3.up * 2.0f * (isAvailable ? -1 : 1);
+            if(content != null)
+            {
+                content.SetAvailable(isAvailable);
+            }
+        }
+           
        
     }
 

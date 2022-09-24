@@ -7,7 +7,7 @@ using UnityEditor;
 public class HexCellEditor : Editor
 {
     HexCell tgt;
-     EContentType c;
+    [SerializeField] EContentType c;
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -51,6 +51,11 @@ public class HexCellEditor : Editor
                     break;
                 }
             }
+        }
+
+        if(GUILayout.Button("Toggle Active"))
+        {
+            tgt.ToggleAvailable(false);
         }
     }
     

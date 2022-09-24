@@ -11,7 +11,13 @@ public class ResourceContainer
 
 public class HexCellContent : MonoBehaviour
 {
+    public InventoryUI inventoryUIPrefab;
+    [HideInInspector] public InventoryUI inventoryUIInstance;
+
+    public Transform upperPosition;
     public ResourceContainer currentlyStoredResources;
+
+    public GameObject meshObject;
 
     public virtual bool IsDestructible => true;
     public virtual bool IsInteractable => true;
@@ -25,12 +31,19 @@ public class HexCellContent : MonoBehaviour
 
     public HexCell hexCellReference;
 
+    public bool cellCurrentlyAvailable = true;
+
     public virtual void Initialize(HexCell hexCell)
     {
         hexCellReference = hexCell;
     }
 
     public virtual bool SpawnConditions => true;
+
+    void Awake() 
+    {
+        UpdateInventoryUI();
+    }
 
     void Update() 
     {
@@ -39,7 +52,8 @@ public class HexCellContent : MonoBehaviour
 
     public virtual void ContentUpdate()
     {
-
+        if(!cellCurrentlyAvailable)
+            return;
     }
 
     public virtual void Destruct()
@@ -47,8 +61,22 @@ public class HexCellContent : MonoBehaviour
 
     }
 
+    public virtual void SetAvailable(bool available)
+    {
+        if(inventoryUIInstance != null)
+            inventoryUIInstance.gameObject.SetActive(available);
+
+        cellCurrentlyAvailable = available;
+        meshObject.SetActive(available);
+    }
+
     public void UpdateInventoryUI()
     {
+        if(inventoryUIInstance == null)
+        {
+            inventoryUIInstance = Instantiate(inventoryUIPrefab, upperPosition.position, Quaternion.identity);
+        }
+        inventoryUIInstance.UpdateUI(currentlyStoredResources);
 
     }
 
@@ -72,6 +100,7 @@ public class HexCellContent : MonoBehaviour
             giver.storedResources[typeIndex] -= takerRemainingSpace;            
         }
 
+        UpdateInventoryUI();
         UIManagement.Instance.UpdateCurrencyPanels();
     }
 }

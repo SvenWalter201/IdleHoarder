@@ -27,6 +27,8 @@ public class HexGrid : Singleton<HexGrid>
 
     MeshCollider meshCollider;
 
+    [SerializeField] LayerMask hexGridLayerMask, squirrelLayerMask;
+
     [SerializeField]
     public Village villagePrefab;
     public MainBase mainBasePrefab;
@@ -136,7 +138,7 @@ public class HexGrid : Singleton<HexGrid>
 		label.rectTransform.SetParent(gridCanvas.transform, false);
 		label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
 		//label.text = cell.coordinates.ToStringOnSeparateLines();  
-
+        label.gameObject.SetActive(false);
         cell.label = label;  
     }
     
@@ -158,7 +160,7 @@ public class HexGrid : Singleton<HexGrid>
             {
                 Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(inputRay, out hit)) 
+                if (Physics.Raycast(inputRay, out hit, 1000.0f, hexGridLayerMask)) 
                 {
                     if(selectionRectangleInstance == null)
                     {
@@ -169,7 +171,31 @@ public class HexGrid : Singleton<HexGrid>
                 }
             }
         }
+        else
+        {
+            Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(inputRay, out hit, 1000.0f, squirrelLayerMask)) 
+            {
+                var squirrelHit = hit.collider.gameObject.GetComponent<SquirrelBehaviour>();
+                if(currentlyDisplayingSquirrel == null)
+                {
+                    squirrelHit.ShowInventoryUI();
+                    currentlyDisplayingSquirrel = squirrelHit;
+                }
+            }
+            else
+            {
+                if(currentlyDisplayingSquirrel != null)
+                {
+                    currentlyDisplayingSquirrel.HideInventoryUI();
+                    currentlyDisplayingSquirrel = null;
+                }
+            }
+        }
     }
+
+    SquirrelBehaviour currentlyDisplayingSquirrel;
 
     bool mouseButtonCurrentlyPressed = false;
     void HandleLeftMousePressed () 
@@ -178,7 +204,7 @@ public class HexGrid : Singleton<HexGrid>
         beginSelectionPoint = Vector3.zero;
 		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (Physics.Raycast(inputRay, out hit)) 
+		if (Physics.Raycast(inputRay, out hit, 1000.0f, hexGridLayerMask)) 
         {
 			TouchCell(hit.point);
 		}
@@ -199,7 +225,7 @@ public class HexGrid : Singleton<HexGrid>
         {
             Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(inputRay, out hit)) 
+            if (Physics.Raycast(inputRay, out hit, 1000.0f, hexGridLayerMask)) 
             {
                 if(beginSelectionPoint == Vector3.zero)
                 {
@@ -221,7 +247,7 @@ public class HexGrid : Singleton<HexGrid>
                 {
                     var current = allSquirrels[i];
                     Vector3 position = current.transform.position;
-                    if(position.x > min.x && position.x < max.x && position.z > min.z && position.z < max.z)
+                    if(position.x + 3 > min.x && position.x - 3 < max.x && position.z + 3 > min.z && position.z - 3 < max.z)
                     {
                         current.SetHighlight();
                         selectedSquirrels.Add(current);
@@ -235,7 +261,7 @@ public class HexGrid : Singleton<HexGrid>
                 {
                     foreach (var cell in cells)
                     {
-                        if(cell.content != null && cell.content.IsInteractable)
+                        if(cell.content != null && cell.content.IsInteractable && cell.isAvailable)
                         {
                             highlightedCells.Add(cell);
                             cell.SetSelected();
@@ -284,7 +310,7 @@ public class HexGrid : Singleton<HexGrid>
         {
             case SelectionMode.ToggleAvailable:
             {
-                cell.ToggleAvailable();
+                cell.ToggleAvailable(true);
                 OnGridUpdate?.Invoke();
                 break;
             }
@@ -310,7 +336,7 @@ public class HexGrid : Singleton<HexGrid>
             }
             case SelectionMode.CommandUnits:
             {
-                if(selectedSquirrels.Count != 0 && cell.isOccupied && cell.content.IsInteractable)
+                if(selectedSquirrels.Count != 0 && cell.isOccupied && cell.content.IsInteractable && cell.isAvailable)
                 {
                     Debug.Log("Clicked on something valid!");
                     foreach (var squirrel in selectedSquirrels)
