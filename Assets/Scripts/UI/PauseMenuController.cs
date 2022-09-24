@@ -9,12 +9,6 @@ using TMPro;
 public class PauseMenuController : MonoBehaviour
 {
     [SerializeField]
-    string titelScreen = "TitelScreen";
-
-    [SerializeField]
-    string pauseMenuName = "PauseMenu";
-
-    [SerializeField]
     GameObject PauseMenu = default;
     
     [SerializeField]
