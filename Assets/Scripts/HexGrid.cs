@@ -30,6 +30,9 @@ public class HexGrid : Singleton<HexGrid>
 
     [SerializeField] LayerMask hexGridLayerMask, squirrelLayerMask, buildingLayerMask;
 
+    public AudioSource buildVillage;
+    public AudioSource destroyVillage;
+
     [SerializeField]
     public Village villagePrefab;
     public MainBase mainBasePrefab;
@@ -403,7 +406,12 @@ public class HexGrid : Singleton<HexGrid>
                 }
                 
                 if(cell.SetContent(villagePrefab))
+                {
                     OnGridUpdate?.Invoke();
+                    buildVillage.Play();
+                    //AudioSource.PlayClipAtPoint(buildVillage, transform.position);
+                }
+                    
                 
                 break;
             }
@@ -423,6 +431,8 @@ public class HexGrid : Singleton<HexGrid>
                     cell.content.meshObject.GetComponentInChildren<SquirrelSpawner>().Despawn();
 
                     OnGridUpdate?.Invoke();
+                    destroyVillage.Play();
+                    //AudioSource.PlayClipAtPoint(destroyVillage, transform.position);
                 }
                     
 

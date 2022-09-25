@@ -117,6 +117,10 @@ MonoBehaviour:
   inventoryUIInstance: {fileID: 0}
   meshPrefabList:
   - {fileID: 7627758881302167467, guid: 7d0e51fea15466e4aa8fcd3ad8a9bb52, type: 3}
+  - {fileID: 7627758881302167467, guid: 8c6cfae0b95ca5f4cbb9b6ef01916f9f, type: 3}
+  - {fileID: 7627758881302167467, guid: f168452c70b5c8e4a85fcbc7f171f57d, type: 3}
+  - {fileID: 7627758881302167467, guid: 5815ca5e8ea1de547b4111e6945cb948, type: 3}
+  - {fileID: 7627758881302167467, guid: c5ebae04db9f7ff48b85a28d40c02460, type: 3}
   upperPosition: {fileID: 9163705029904585866}
   currentlyStoredResources:
     storedResources: 00000000000000000000000000000000
