@@ -44,6 +44,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Available: 1
+    - _HoverAmount: 0.25
     - _MildBorderHighlight: 0.293
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -56,6 +57,7 @@ Material:
     - _FogColorA: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
     - _FogColorB: {r: 0.09433959, g: 0.09433959, b: 0.09433959, a: 0}
     - _FogScrollSpeed: {r: 0, g: 1, b: 0, a: 0}
+    - _HoverColor: {r: 0, g: 0, b: 0, a: 0}
     - _SelectionHighlight: {r: 2.5442057, g: 1.3101323, b: 0.5461384, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7408180141134185666

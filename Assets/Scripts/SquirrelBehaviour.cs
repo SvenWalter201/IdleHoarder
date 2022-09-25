@@ -7,34 +7,99 @@ public class SquirrelBehaviour : MonoBehaviour
     public float speed = 20.0f;
     State[] states;
 
-    public ResourceContainer inventory;
+    static string[] names = new string[]
+    {
+        "Squalian",
+        "Acorina",
+        "Oka",
+        "Humin",
+        "Hugin",
+        "Chisai",
+        "Hambrus",
+        "Indri"
+
+    };
+
+    public ResourceContainer inventory, squirrelNeedsPer5s;
     public GameObject highlightPrefab;
+
+    public GameObject exclamationMarkPrefab;
+    [HideInInspector] public GameObject exclamationMarkInstance;
+
+
+    public SquirrelInformationPanel detailInformationPrefab;
+    [HideInInspector] public SquirrelInformationPanel detailInformationInstance;
     public Transform upperPoint;
     public InventoryUI inventoryUIPrefab;
     [HideInInspector] public InventoryUI inventoryUIInstance;
 
     GameObject highlightInstance;
-    int currentStateIndex = 1;
+    public int currentStateIndex = 1;
     // Start is called before the first frame update
+
+    float timeUntilNextFoodCheck = 0.0f;
+
+    const float foodCheckInterval = 5.0f;
+
+    string n;
 
     void Awake() 
     {
-        HexGrid.Instance.allSquirrels.Add(this);
+        HexGrid.Instance.AddSquirrel(this);
         GetComponentInChildren<MeshRenderer>().gameObject.transform.localScale *= Random.Range(0.8f, 1.2f);
         speed = speed * Random.Range(0.8f, 1.2f);
+        n = names[Random.Range(0, names.Length)];
     }
 
     void Start()
     {
-        states = new State[2];
+        states = new State[3];
         states[0] = new Idle(this);
         states[1] = new TransportationWork(this);
+        states[2] = new Tired(this);
         SetState(0);
     }
+
+    public int stateBeforeTiredIndex = 0;
 
     // Update is called once per frame
     void Update()
     {
+        timeUntilNextFoodCheck -= Time.deltaTime;
+        if(timeUntilNextFoodCheck <= 0.0f)
+        {
+
+            var mainBase = HexGrid.Instance.mainBaseInstance;
+            if(mainBase.currentlyStoredResources.storedResources[0] >= squirrelNeedsPer5s.capacities[0] &&
+            mainBase.currentlyStoredResources.storedResources[2] >= squirrelNeedsPer5s.capacities[2])
+            {
+                mainBase.currentlyStoredResources.storedResources[0] -= squirrelNeedsPer5s.capacities[0];
+                mainBase.currentlyStoredResources.storedResources[2] -= squirrelNeedsPer5s.capacities[2];
+                mainBase.UpdateInventoryUI();
+                UIManagement.Instance.UpdateCurrencyPanels();
+
+                if(currentStateIndex == 2)
+                {
+                    if(exclamationMarkInstance != null)
+                        Destroy(exclamationMarkInstance);
+
+                    SetState(stateBeforeTiredIndex);
+                }
+            }
+            else
+            {
+                if(currentStateIndex != 2)
+                {
+                    Debug.Log("Getting Tired");
+                    stateBeforeTiredIndex = currentStateIndex;
+                    exclamationMarkInstance = Instantiate(exclamationMarkPrefab, upperPoint.position, Quaternion.identity);
+                    SetState(2);
+                }
+                
+            }
+
+            timeUntilNextFoodCheck = foodCheckInterval;
+        }
         states[currentStateIndex].Update();
     }
 
@@ -44,6 +109,12 @@ public class SquirrelBehaviour : MonoBehaviour
         {
             inventoryUIInstance = Instantiate(inventoryUIPrefab, upperPoint.position, Quaternion.identity);
             inventoryUIInstance.UpdateUI(inventory, upperPoint);
+
+            detailInformationInstance = Instantiate(detailInformationPrefab, upperPoint.position, Quaternion.identity);
+            detailInformationInstance.UpdateUI(n, currentStateIndex, upperPoint);
+
+            if(exclamationMarkInstance != null)
+                exclamationMarkInstance.SetActive(false);
         }
 
     }
@@ -51,12 +122,22 @@ public class SquirrelBehaviour : MonoBehaviour
     public void HideInventoryUI()
     {
         if(inventoryUIInstance != null)
+        {
             Destroy(inventoryUIInstance.gameObject);
+            Destroy(detailInformationInstance.gameObject);
+
+            if(exclamationMarkInstance != null)
+                exclamationMarkInstance.SetActive(true);
+        }
     }
 
     public void IssueWork(HexCellContent mainBase, HexCellContent otherDeposit)
     {
-        SetState(1);
+        if(currentStateIndex != 2)
+            SetState(1);
+        else 
+            stateBeforeTiredIndex = 1;
+
         var s = states[1] as TransportationWork;
         s.mainBase = mainBase;
         s.otherDeposit = otherDeposit;
@@ -78,6 +159,15 @@ public class SquirrelBehaviour : MonoBehaviour
     {
         if(highlightInstance != null)
             Destroy(highlightInstance);
+    }
+
+    public void Destroy()
+    {
+        HexGrid.Instance.RemoveSquirrel(this);
+        RemoveHighlight();
+        HideInventoryUI();
+        if(exclamationMarkInstance != null) Destroy(exclamationMarkInstance);
+        Destroy(gameObject);
     }
 
     void SetState(int index)
@@ -143,6 +233,7 @@ public class TransportationWork : State
     {
         base.StateEnter();
         HexGrid.Instance.OnGridUpdate += OnGridUpdate;
+        path = null;
     }
     public override void Update()
     {
@@ -159,7 +250,9 @@ public class TransportationWork : State
             currentGoal = mainBase;
             otherGoal = otherDeposit;
             currentPathIndex = 1;
-            Debug.Log(path.Count);
+            Debug.Log("PathLength: " + path.Count);
+            if(path.Count == 1)
+                currentPathIndex = 0;
         }
 
         if(updateRandomV3)
@@ -168,45 +261,48 @@ public class TransportationWork : State
             updateRandomV3 = false;
         }
 
-
-        var currentNode = path[currentPathIndex];
-        //if on a village and there is no village path yet, get the village path
-        if(currentNode.content != null && currentNode.content.Name == "Village" && currentVillagePath == null)
+        if(path.Count > 1)
         {
-            var villagePathFinder = currentNode.content.meshObject.GetComponentInChildren<VillagePathfinder>();
-
-            if(currentPathIndex > 0 && currentPathIndex < path.Count - 1)
+            var currentNode = path[currentPathIndex];
+            //if on a village and there is no village path yet, get the village path
+            if(currentNode.content != null && currentNode.content.Name == "Village" && currentVillagePath == null)
             {
-                var cameFromNode = path[currentPathIndex - 1];
-                var goToNode = path[currentPathIndex + 1];
+                var villagePathFinder = currentNode.content.meshObject.GetComponentInChildren<VillagePathfinder>();
 
-                int cameFromIndex = -1;
-                int goToIndex = -1;
-                for (int i = 0; i < 6; i++)
+                if(currentPathIndex > 0 && currentPathIndex < path.Count - 1)
                 {
-                    if(cameFromNode == currentNode.GetNeighbor(i)) cameFromIndex = i;
-                    if(goToNode == currentNode.GetNeighbor(i)) goToIndex = i;
+                    var cameFromNode = path[currentPathIndex - 1];
+                    var goToNode = path[currentPathIndex + 1];
 
+                    int cameFromIndex = -1;
+                    int goToIndex = -1;
+                    for (int i = 0; i < 6; i++)
+                    {
+                        if(cameFromNode == currentNode.GetNeighbor(i)) cameFromIndex = i;
+                        if(goToNode == currentNode.GetNeighbor(i)) goToIndex = i;
+
+                    }
+
+                    if(goToIndex == -1 || cameFromIndex == -1)
+                    {
+                        Debug.LogWarning("Somehow neighbor not found");
+                        return;
+                    }
+
+                    currentVillagePath = villagePathFinder.GetPath(cameFromIndex, goToIndex);
+                    currentlyOnVillagePath = true;
                 }
-
-                if(goToIndex == -1 || cameFromIndex == -1)
+                else
                 {
-                    Debug.LogWarning("Somehow neighbor not found");
-                    return;
+                    if(currentPathIndex == 0)
+                        Debug.Log("Village was at first position");
+
+                    if(currentPathIndex == path.Count - 1)
+                        Debug.Log("Village was at last position");                    
                 }
-
-                currentVillagePath = villagePathFinder.GetPath(cameFromIndex, goToIndex);
-                currentlyOnVillagePath = true;
-            }
-            else
-            {
-                if(currentPathIndex == 0)
-                    Debug.Log("Village was at first position");
-
-                if(currentPathIndex == path.Count - 1)
-                    Debug.Log("Village was at last position");                    
             }
         }
+        
 
         float distanceToGoal = (currentGoal.transform.position - stateMachine.transform.position).magnitude;
 
@@ -216,10 +312,10 @@ public class TransportationWork : State
             if(currentGoal == mainBase)
             {
                 for (int i = 0; i < 4; i++)
-                    currentGoal.Store(stateMachine.inventory, i);
+                    currentGoal.Store(stateMachine.inventory, i, false);
 
                 if(otherGoal.RequiredResource != ECurrency.None)
-                    currentGoal.Take(stateMachine.inventory, (int)otherGoal.RequiredResource);
+                    currentGoal.Take(stateMachine.inventory, (int)otherGoal.RequiredResource, true);
 
                 currentGoal = otherDeposit;
                 otherGoal = mainBase;
@@ -228,12 +324,12 @@ public class TransportationWork : State
             else
             {
                 if(currentGoal.RequiredResource != ECurrency.None)
-                    currentGoal.Store(stateMachine.inventory, (int)currentGoal.RequiredResource);
+                    currentGoal.Store(stateMachine.inventory, (int)currentGoal.RequiredResource, false);
 
                 for (int i = 0; i < 4; i++)
                 {
                     if((int)currentGoal.RequiredResource != i)
-                        currentGoal.Take(stateMachine.inventory, i);
+                        currentGoal.Take(stateMachine.inventory, i, false);
                 }
 
                 currentGoal = mainBase;
@@ -290,6 +386,16 @@ public class TransportationWork : State
         
 
 
+    }
+}
+
+public class Tired : State
+{
+    public Tired(SquirrelBehaviour stateMachine) : base(stateMachine){}
+
+    public override void Update()
+    {
+        base.Update();
     }
 }
 

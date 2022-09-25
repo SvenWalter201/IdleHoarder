@@ -46,6 +46,16 @@ public class HexCell : MonoBehaviour
         SetBuyLandMenu(true);
     }
 
+    public void SetHovered(Color color)
+    {
+        mR.material.SetColor("_HoverColor", color);
+    }
+
+    public void ResetHovered()
+    {
+        mR.material.SetColor("_HoverColor", Color.black);
+    }
+
     public void ToggleAvailable(bool updateGraphics)
     {
         isAvailable = !isAvailable;

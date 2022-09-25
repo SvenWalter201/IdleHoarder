@@ -18,10 +18,10 @@ public enum EContentType
 public class HexGrid : Singleton<HexGrid>
 {
     public int width = 6, height = 6;
-
     public HexCell cellPrefab;
 	public TMP_Text cellLabelPrefab;
 
+    public ResourceContainer cap;
     public HexCell[] cells;
 
     Canvas gridCanvas;
@@ -40,8 +40,6 @@ public class HexGrid : Singleton<HexGrid>
     [Space]
     public MainBase mainBaseInstance;
     public List<HexCellContent> productionSites = new List<HexCellContent>();
-    public BeaverTradePost beaverTradePost;
-    public MoleTradePost moleTradePost;
 
     void Awake() 
     {
@@ -49,6 +47,12 @@ public class HexGrid : Singleton<HexGrid>
         gridCanvas = GetComponentInChildren<Canvas>();
         meshCollider = GetComponent<MeshCollider>();      
         //Generate();
+    }
+
+    public void UpdateCap()
+    {
+        cap.storedResources[0] = allSquirrels.Count * 12;
+        cap.storedResources[2] = allSquirrels.Count * 6;
     }
 
     public void AddProductionSite(HexCellContent productionSite)
@@ -87,7 +91,17 @@ public class HexGrid : Singleton<HexGrid>
     }
 
 
+    public void AddSquirrel(SquirrelBehaviour s)
+    {
+        allSquirrels.Add(s);
+        UpdateCap();
+    }
 
+    public void RemoveSquirrel(SquirrelBehaviour s)
+    {
+        allSquirrels.Remove(s);
+        UpdateCap();
+    }
 
     public HexCell GetDepositLocation()
     {
@@ -140,7 +154,7 @@ public class HexGrid : Singleton<HexGrid>
 		label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
 		//label.text = cell.coordinates.ToStringOnSeparateLines();  
         label.gameObject.SetActive(false);
-        cell.label = label;  
+        cell.label = label;
     }
     
     void Update() 
@@ -177,26 +191,30 @@ public class HexGrid : Singleton<HexGrid>
             Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
+            bool bH = false, sH = false, vH = false, vdH = false;
             if (Physics.Raycast(inputRay, out hit, 1000.0f, buildingLayerMask)) 
             {
                 var buildingHit = hit.collider.gameObject.GetComponent<HexCellContent>();
-                if(currentlyDisplayingBuilding == null)
+                bH = true;
+                if(currentlyDisplayingBuilding == null && buildingHit.hexCellReference.isAvailable)
                 {
                     buildingHit.ShowDetails();
                     currentlyDisplayingBuilding = buildingHit;
                 }
-            }
-            else
-            {
-                if(currentlyDisplayingBuilding != null)
+
+                if(buildingHit.Name == "Village" && UIManagement.Instance.selectionMode == SelectionMode.Destroy)
                 {
-                    currentlyDisplayingBuilding.HideDetails();
-                    currentlyDisplayingBuilding = null;
+                    vdH = true;
+                    if(currentlyRedHoveredCell != null && currentlyRedHoveredCell != buildingHit.hexCellReference)
+                        currentlyRedHoveredCell.ResetHovered();
+
+                    currentlyRedHoveredCell = buildingHit.hexCellReference;
+                    currentlyRedHoveredCell.SetHovered(Color.red);
                 }
             }
-
-            if (Physics.Raycast(inputRay, out hit, 1000.0f, squirrelLayerMask)) 
+            else if (Physics.Raycast(inputRay, out hit, 1000.0f, squirrelLayerMask)) 
             {
+                sH = true;
                 var squirrelHit = hit.collider.gameObject.GetComponent<SquirrelBehaviour>();
                 if(currentlyDisplayingSquirrel == null)
                 {
@@ -204,16 +222,43 @@ public class HexGrid : Singleton<HexGrid>
                     currentlyDisplayingSquirrel = squirrelHit;
                 }
             }
-            else
+            else if (UIManagement.Instance.selectionMode == SelectionMode.Village && Physics.Raycast(inputRay, out hit, 1000.0f, hexGridLayerMask))
             {
-                if(currentlyDisplayingSquirrel != null)
+		        HexCell cell = CellFromPosition(hit.point);
+                if(!cell.isOccupied && cell.isAvailable)
                 {
-                    currentlyDisplayingSquirrel.HideInventoryUI();
-                    currentlyDisplayingSquirrel = null;
+                    vH = true;
+                    if(currentlyHoveredCell != null && currentlyHoveredCell != cell)
+                        currentlyHoveredCell.ResetHovered();
+
+                    currentlyHoveredCell = cell;
+                    currentlyHoveredCell.SetHovered(Color.green);
                 }
             }
 
+            if(!sH && currentlyDisplayingSquirrel != null)
+            {
+                currentlyDisplayingSquirrel.HideInventoryUI();
+                currentlyDisplayingSquirrel = null;
+            }
+
+            if(!bH && currentlyDisplayingBuilding != null)
+            {
+                currentlyDisplayingBuilding.HideDetails();
+                currentlyDisplayingBuilding = null;
+            }
+
+            if(!vH && currentlyHoveredCell != null)
+            {
+                currentlyHoveredCell.ResetHovered();
+                currentlyHoveredCell = null;
+            }
             
+            if(!vdH && currentlyRedHoveredCell != null)
+            {
+                currentlyRedHoveredCell.ResetHovered();
+                currentlyRedHoveredCell = null;
+            }
         }
 
         
@@ -274,6 +319,9 @@ public class HexGrid : Singleton<HexGrid>
                 for (int i = 0; i < allSquirrels.Count; i++)
                 {
                     var current = allSquirrels[i];
+                    //if(current.currentStateIndex == 2)
+                    //    continue;
+
                     Vector3 position = current.transform.position;
                     if(position.x + 3 > min.x && position.x - 3 < max.x && position.z + 3 > min.z && position.z - 3 < max.z)
                     {
@@ -300,6 +348,7 @@ public class HexGrid : Singleton<HexGrid>
         }
     }
 
+    HexCell currentlyHoveredCell, currentlyRedHoveredCell;
     List<HexCell> highlightedCells = new List<HexCell>();
 
     void ClearSquirrelHighlights()
@@ -346,6 +395,12 @@ public class HexGrid : Singleton<HexGrid>
             {
                 if(cell.isOccupied || !cell.isAvailable)
                     return;
+
+                if(currentlyHoveredCell != null)
+                {
+                    currentlyHoveredCell.ResetHovered();
+                    currentlyHoveredCell = null;
+                }
                 
                 if(cell.SetContent(villagePrefab))
                     OnGridUpdate?.Invoke();
@@ -357,8 +412,19 @@ public class HexGrid : Singleton<HexGrid>
                 if(!cell.isOccupied)
                     return;
 
+                if(currentlyRedHoveredCell != null)
+                {
+                    currentlyRedHoveredCell.ResetHovered();
+                    currentlyRedHoveredCell = null;
+                }
+
                 if(cell.DestroyContent())
+                {
+                    cell.content.meshObject.GetComponentInChildren<SquirrelSpawner>().Despawn();
+
                     OnGridUpdate?.Invoke();
+                }
+                    
 
                 break;
             }
@@ -378,6 +444,8 @@ public class HexGrid : Singleton<HexGrid>
                     foreach (var squirrel in selectedSquirrels)
                     {
                         squirrel.IssueWork(mainBaseInstance, cell.content);
+                        
+
                     }
                     //Issue commands on the squirrels
                 }
