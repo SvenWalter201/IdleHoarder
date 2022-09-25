@@ -43,6 +43,7 @@ public class HexCell : MonoBehaviour
     void Start() 
     {
         //transform.position += Vector3.up * Random.Range(-1f, 1f);
+        SetBuyLandMenu(true);
     }
 
     public void ToggleAvailable(bool updateGraphics)
@@ -58,8 +59,10 @@ public class HexCell : MonoBehaviour
             }
         }
 
-        SetBuyLandMenu(true);
-
+        if(Application.isPlaying)
+        {
+            SetBuyLandMenu(true);
+        }
     }
 
     public void SetBuyLandMenu(bool cascade)

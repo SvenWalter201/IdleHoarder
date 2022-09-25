@@ -176,23 +176,6 @@ public class HexGrid : Singleton<HexGrid>
         {
             Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(inputRay, out hit, 1000.0f, squirrelLayerMask)) 
-            {
-                var squirrelHit = hit.collider.gameObject.GetComponent<SquirrelBehaviour>();
-                if(currentlyDisplayingSquirrel == null)
-                {
-                    squirrelHit.ShowInventoryUI();
-                    currentlyDisplayingSquirrel = squirrelHit;
-                }
-            }
-            else
-            {
-                if(currentlyDisplayingSquirrel != null)
-                {
-                    currentlyDisplayingSquirrel.HideInventoryUI();
-                    currentlyDisplayingSquirrel = null;
-                }
-            }
 
             if (Physics.Raycast(inputRay, out hit, 1000.0f, buildingLayerMask)) 
             {
@@ -211,6 +194,26 @@ public class HexGrid : Singleton<HexGrid>
                     currentlyDisplayingBuilding = null;
                 }
             }
+
+            if (Physics.Raycast(inputRay, out hit, 1000.0f, squirrelLayerMask)) 
+            {
+                var squirrelHit = hit.collider.gameObject.GetComponent<SquirrelBehaviour>();
+                if(currentlyDisplayingSquirrel == null)
+                {
+                    squirrelHit.ShowInventoryUI();
+                    currentlyDisplayingSquirrel = squirrelHit;
+                }
+            }
+            else
+            {
+                if(currentlyDisplayingSquirrel != null)
+                {
+                    currentlyDisplayingSquirrel.HideInventoryUI();
+                    currentlyDisplayingSquirrel = null;
+                }
+            }
+
+            
         }
 
         
@@ -417,8 +420,8 @@ public class HexGrid : Singleton<HexGrid>
             Debug.Log("Max Length Error!");
         }
 
-        if(path.Count > 1)
-            path.RemoveAt(path.Count-1);
+        //if(path.Count > 1)
+        //    path.RemoveAt(path.Count-1);
             
         path.Reverse();
         return path;
@@ -457,7 +460,7 @@ public class HexGrid : Singleton<HexGrid>
                 }
                 
                 
-                if(neighbor.isOccupied)
+                if(neighbor.isOccupied && neighbor.content.Name != "Village")
                     continue;
 
                 if(!neighbor.isAvailable)
