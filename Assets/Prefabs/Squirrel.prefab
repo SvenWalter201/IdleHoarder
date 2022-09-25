@@ -51,12 +51,23 @@ MonoBehaviour:
   inventory:
     storedResources: 00000000000000000000000000000000
     capacities: 05000000050000000500000005000000
+  squirrelNeedsPer5s:
+    storedResources: 00000000000000000000000000000000
+    capacities: 02000000000000000100000000000000
   highlightPrefab: {fileID: 8997208210179707149, guid: 86628f17017d88a4fad030d2b9455a8b,
     type: 3}
+  exclamationMarkPrefab: {fileID: 6135936379582285043, guid: 6f3522a3bad6c1049ba713ca65efd1d5,
+    type: 3}
+  exclamationMarkInstance: {fileID: 0}
+  detailInformationPrefab: {fileID: 4011739768158821421, guid: 2b0984c80d1bb20419cf2d5e8af1c6b5,
+    type: 3}
+  detailInformationInstance: {fileID: 0}
   upperPoint: {fileID: 8707314141639336651}
   inventoryUIPrefab: {fileID: 6615736418308983410, guid: 5cf507a00c7f57c43ba48f79bffb19a3,
     type: 3}
   inventoryUIInstance: {fileID: 0}
+  currentStateIndex: 1
+  stateBeforeTiredIndex: 0
 --- !u!135 &1795047618017717934
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -68,8 +79,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2523908612079775421
 GameObject:
   m_ObjectHideFlags: 0

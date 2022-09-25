@@ -6,6 +6,7 @@ public static class Global
 {
     public static int acornAmount, woodAmount, waterAmount, stoneAmount; //total currency
 
+
     public static bool BuyContent(ResourceContainer cost)
     {
 

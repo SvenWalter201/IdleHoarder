@@ -105,24 +105,47 @@ public class HexCellContent : MonoBehaviour
 
     }
 
-    public virtual void Store(ResourceContainer input, int type) =>
-        ExchangeResources(input, currentlyStoredResources, type);
+    public virtual void Store(ResourceContainer input, int type, bool regardCap) =>
+        ExchangeResources(input, currentlyStoredResources, type, regardCap);
 
-    public void Take(ResourceContainer input, int type) =>
-        ExchangeResources(currentlyStoredResources, input, type);
+    public void Take(ResourceContainer input, int type, bool regardCap) =>
+        ExchangeResources(currentlyStoredResources, input, type, regardCap);
 
-    public virtual void ExchangeResources(ResourceContainer giver, ResourceContainer taker, int typeIndex)
+    public virtual void ExchangeResources(ResourceContainer giver, ResourceContainer taker, int typeIndex, bool regardCap)
     {
         int takerRemainingSpace = taker.capacities[typeIndex] - taker.storedResources[typeIndex];
-        if(takerRemainingSpace >= giver.storedResources[typeIndex])
+
+        if(regardCap)
         {
-            taker.storedResources[typeIndex] += giver.storedResources[typeIndex];
-            giver.storedResources[typeIndex] = 0;
-        } 
+            var cap = HexGrid.Instance.cap;
+            int availableResources = giver.storedResources[typeIndex] - cap.storedResources[typeIndex];
+            if(availableResources > 0)
+            {
+                if(takerRemainingSpace >=  availableResources)
+                {
+                    taker.storedResources[typeIndex] += availableResources;
+                    giver.storedResources[typeIndex] = cap.storedResources[typeIndex];
+                } 
+                else
+                {
+                    taker.storedResources[typeIndex] += takerRemainingSpace;
+                    giver.storedResources[typeIndex] -= takerRemainingSpace;            
+                }
+            }
+            
+        }
         else
         {
-            taker.storedResources[typeIndex] += takerRemainingSpace;
-            giver.storedResources[typeIndex] -= takerRemainingSpace;            
+            if(takerRemainingSpace >= giver.storedResources[typeIndex])
+            {
+                taker.storedResources[typeIndex] += giver.storedResources[typeIndex];
+                giver.storedResources[typeIndex] = 0;
+            } 
+            else
+            {
+                taker.storedResources[typeIndex] += takerRemainingSpace;
+                giver.storedResources[typeIndex] -= takerRemainingSpace;            
+            }
         }
 
         UpdateInventoryUI();

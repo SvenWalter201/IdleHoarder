@@ -40,8 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2667736929133258142}
-  - component: {fileID: 3900494433899284343}
-  - component: {fileID: 1467418215846795031}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -64,56 +62,6 @@ Transform:
   m_Father: {fileID: 2719481369255122115}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3900494433899284343
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6882852839051444623}
-  m_Mesh: {fileID: 5784849628261665817, guid: f7fa09c6c2830b141aa8e7baf8659bdf, type: 3}
---- !u!23 &1467418215846795031
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6882852839051444623}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 9558cf4436a097e46bc953e8ebedcecd, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7627758881302167467
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +115,8 @@ MonoBehaviour:
   inventoryUIPrefab: {fileID: 6615736418308983410, guid: 5cf507a00c7f57c43ba48f79bffb19a3,
     type: 3}
   inventoryUIInstance: {fileID: 0}
-  meshPrefabList: []
+  meshPrefabList:
+  - {fileID: 7627758881302167467, guid: 7d0e51fea15466e4aa8fcd3ad8a9bb52, type: 3}
   upperPosition: {fileID: 9163705029904585866}
   currentlyStoredResources:
     storedResources: 00000000000000000000000000000000
