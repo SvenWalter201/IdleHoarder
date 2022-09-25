@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1247425411288898716}
   - component: {fileID: 9019985597487664008}
   - component: {fileID: 8928220551821436533}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lake 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ MonoBehaviour:
   upperPosition: {fileID: 5897259624788528832}
   currentlyStoredResources:
     storedResources: 00000000000000000000000000000000
-    capacities: 00000000000000000000000000000000
+    capacities: 00000000000000006400000000000000
   meshObject: {fileID: 5937912318993850181}
   hexCellReference: {fileID: 0}
   cellCurrentlyAvailable: 1
