@@ -151,7 +151,10 @@ public class UIManagement : Singleton<UIManagement>
     {
         if(btn.colors == pressed)
         {
-            selectionMode = SelectionMode.CommandUnits;
+            if(toggleBuildingModeButton.colors == buildModePressed)
+                selectionMode = SelectionMode.Build;
+            else 
+                selectionMode = SelectionMode.CommandUnits;
             btn.colors = normal;
         }
         else 

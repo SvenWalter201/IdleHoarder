@@ -11,7 +11,8 @@ public class Village : HexCellContent
     public override ResourceContainer GetCost()
     {
         var c = new ResourceContainer();
-        c.storedResources[0] = 10;
+        c.storedResources[0] = 40;
+        c.storedResources[1] = 20;
         return c;
     }
 }

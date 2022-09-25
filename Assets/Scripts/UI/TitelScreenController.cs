@@ -9,10 +9,16 @@ public class TitelScreenController : MonoBehaviour
     [SerializeField]
     GameObject TitelScreen = default;
 
+    void Awake() 
+    {
+        if(TitelScreen.activeInHierarchy)
+            Time.timeScale = 0.0f;
+    }
+
     public void StartGame()
     {
         TitelScreen.SetActive(false);
-        
+        Time.timeScale = 1.0f;
     }
 
     public void EndGame()

@@ -186,7 +186,6 @@ public class HexCell : MonoBehaviour
         }
 
         return false;
-
     }
 
     public bool DestroyContent()

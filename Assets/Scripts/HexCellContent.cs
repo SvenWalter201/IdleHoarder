@@ -52,8 +52,7 @@ public class HexCellContent : MonoBehaviour
 
     public virtual bool SpawnConditions => true;
 
-    void Awake() 
-    {
+    void Start() {
         UpdateInventoryUI();
     }
 
@@ -93,16 +92,20 @@ public class HexCellContent : MonoBehaviour
 
         cellCurrentlyAvailable = available;
         meshObject.SetActive(available);
+
+        UpdateInventoryUI();
     }
 
     public void UpdateInventoryUI()
     {
-        if(inventoryUIInstance == null)
+        if(hexCellReference.isAvailable)
         {
-            inventoryUIInstance = Instantiate(inventoryUIPrefab, upperPosition.position, Quaternion.identity);
+            if(inventoryUIInstance == null)
+            {
+                inventoryUIInstance = Instantiate(inventoryUIPrefab, upperPosition.position, Quaternion.identity);
+            }
+            inventoryUIInstance.UpdateUI(currentlyStoredResources);
         }
-        inventoryUIInstance.UpdateUI(currentlyStoredResources);
-
     }
 
     public virtual void Store(ResourceContainer input, int type, bool regardCap) =>

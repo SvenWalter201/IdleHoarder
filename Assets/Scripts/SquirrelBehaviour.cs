@@ -23,6 +23,9 @@ public class SquirrelBehaviour : MonoBehaviour
     public ResourceContainer inventory, squirrelNeedsPer5s;
     public GameObject highlightPrefab;
 
+    public Animator animator;
+
+    public GameObject meshObject;
     public GameObject exclamationMarkPrefab;
     [HideInInspector] public GameObject exclamationMarkInstance;
 
@@ -46,7 +49,7 @@ public class SquirrelBehaviour : MonoBehaviour
     void Awake() 
     {
         HexGrid.Instance.AddSquirrel(this);
-        GetComponentInChildren<MeshRenderer>().gameObject.transform.localScale *= Random.Range(0.8f, 1.2f);
+        meshObject.transform.localScale *= Random.Range(0.8f, 1.2f);
         speed = speed * Random.Range(0.8f, 1.2f);
         n = names[Random.Range(0, names.Length)];
     }
@@ -172,6 +175,7 @@ public class SquirrelBehaviour : MonoBehaviour
 
     void SetState(int index)
     {
+        states[currentStateIndex].StateExit();
         currentStateIndex = index;
         states[currentStateIndex].StateEnter();
     }
@@ -197,6 +201,11 @@ public class State
     }
 
     public virtual void Update()
+    {
+
+    }
+
+    public virtual void StateExit()
     {
 
     }
@@ -234,6 +243,14 @@ public class TransportationWork : State
         base.StateEnter();
         HexGrid.Instance.OnGridUpdate += OnGridUpdate;
         path = null;
+        stateMachine.animator.SetBool("Walking", true);
+
+    }
+
+    public override void StateExit()
+    {
+        stateMachine.animator.SetBool("Walking", false);
+
     }
     public override void Update()
     {
@@ -263,6 +280,8 @@ public class TransportationWork : State
 
         if(path.Count > 1)
         {
+            if(currentPathIndex < 0 ||currentPathIndex >= path.Count)
+                Debug.Log("OOBI: " + currentPathIndex);
             var currentNode = path[currentPathIndex];
             //if on a village and there is no village path yet, get the village path
             if(currentNode.content != null && currentNode.content.Name == "Village" && currentVillagePath == null)
@@ -355,6 +374,11 @@ public class TransportationWork : State
                     currentlyOnVillagePath = false;
                     updateRandomV3 = true;
                     currentPathIndex++;
+                    if(currentPathIndex >= path.Count)
+                    {
+                    Debug.LogWarning("Somehow goal was not reached at the end of path?");   
+                    --currentPathIndex;
+                    }
                 }
             }
 
@@ -383,9 +407,6 @@ public class TransportationWork : State
             Quaternion.LookRotation(nextWayPointDir, Vector3.up), 360.0f * Time.deltaTime);
             stateMachine.transform.position += nextWayPointDir * stateMachine.speed * Time.deltaTime;
         }
-        
-
-
     }
 }
 
@@ -393,6 +414,17 @@ public class Tired : State
 {
     public Tired(SquirrelBehaviour stateMachine) : base(stateMachine){}
 
+    public override void StateEnter()
+    {
+        stateMachine.animator.SetBool("Tired", true);
+
+    }
+
+    public override void StateExit()
+    {
+        stateMachine.animator.SetBool("Tired", false);
+
+    }
     public override void Update()
     {
         base.Update();
@@ -403,6 +435,15 @@ public class Idle : State
 {
     public Idle(SquirrelBehaviour stateMachine) : base(stateMachine){}
 
+    public override void StateEnter()
+    {
+        stateMachine.animator.SetBool("Idle", true);
+    }
+
+    public override void StateExit()
+    {
+        stateMachine.animator.SetBool("Idle", false);
+    }
     public override void Update()
     {
         base.Update();
