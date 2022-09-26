@@ -48,7 +48,7 @@ public class SquirrelBehaviour : MonoBehaviour
 
     float timeUntilNextFoodCheck = 0.0f;
 
-    const float foodCheckInterval = 5.0f;
+    const float foodCheckInterval = 10.0f;
 
     string n;
 

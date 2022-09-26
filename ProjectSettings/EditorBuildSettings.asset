@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UI Scenes/TitelScreen.unity
     guid: 45c8663c3c055954db0590a0b4aa68bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TEST.unity
     guid: e37c85862b0c79b4aba76596ce0fe847
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/UI Scenes/PauseMenu.unity
-    guid: a441897bdac75cf49be9f11e56f98a82
+    path: Assets/Scenes/MapTesting.unity
+    guid: 87d0ad59696268f458ecfe8f52966e53
   m_configObjects: {}

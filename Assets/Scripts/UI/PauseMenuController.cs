@@ -14,19 +14,15 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField]
     GameObject TitelScreen = default;
 
-    private void Update()
+    void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu.SetActive(true);
+            Time.timeScale = 0.0f;
         }
     }
 
-    public void ReturnToMainMenu()
-    {
-        Time.timeScale = 1.0f;
-        TitelScreen.SetActive(true);
-    }
 
     public void ReturnToGame()
     {
