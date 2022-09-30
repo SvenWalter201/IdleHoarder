@@ -128,7 +128,7 @@ MonoBehaviour:
   meshObject: {fileID: 6882852839051444623}
   hexCellReference: {fileID: 0}
   cellCurrentlyAvailable: 1
-  productionRate: 2
+  productionRate: 3.5
 --- !u!135 &5625748589979266983
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class TitelScreenController : MonoBehaviour
 {
     [SerializeField]
-    GameObject TitelScreen = default;
+    GameObject TitelScreen = default, pauseMenu;
 
     void Awake() 
     {
@@ -18,7 +18,8 @@ public class TitelScreenController : MonoBehaviour
     public void StartGame()
     {
         TitelScreen.SetActive(false);
-        Time.timeScale = 1.0f;
+        if(!pauseMenu.activeInHierarchy)
+            Time.timeScale = 1.0f;
     }
 
     public void EndGame()

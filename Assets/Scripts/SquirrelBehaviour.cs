@@ -16,9 +16,15 @@ public class SquirrelBehaviour : MonoBehaviour
         "Hugin",
         "Chisai",
         "Hambrus",
-        "Indri"
-
+        "Indri",
+        "Akrusa",
+        "Edegon",
+        "Epheldri",
+        "Nagusuk",
+        "Fagor",
     };
+
+    public Color[] colors;
 
     public ResourceContainer inventory, squirrelNeedsPer5s;
     public GameObject highlightPrefab;
@@ -42,7 +48,7 @@ public class SquirrelBehaviour : MonoBehaviour
 
     float timeUntilNextFoodCheck = 0.0f;
 
-    const float foodCheckInterval = 5.0f;
+    const float foodCheckInterval = 10.0f;
 
     string n;
 
@@ -50,6 +56,7 @@ public class SquirrelBehaviour : MonoBehaviour
     {
         HexGrid.Instance.AddSquirrel(this);
         meshObject.transform.localScale *= Random.Range(0.8f, 1.2f);
+        meshObject.GetComponentInChildren<Renderer>().materials[0].SetColor("_BaseColor", colors[Random.Range(0, colors.Length)]);
         speed = speed * Random.Range(0.8f, 1.2f);
         n = names[Random.Range(0, names.Length)];
     }
